@@ -23,33 +23,36 @@ class _LoginPageState extends State<LoginUsuarioPage> {
           Text("MoviePhile"),
           GestureDetector(
             child: Text('Debate, Comparte, conoce y acercate al cine',
-                style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
+                style: TextStyle(fontFamily: 'MyFont', fontSize: 10)),
           )
         ]),
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
+          Container(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  'Sing In',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontFamily: 'OpenSans',
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 30.0,
+                )
+              ],
+            ),
+          ),
           _crearEmail(),
           Divider(),
           _crearContrasena(),
           Divider(),
-          RaisedButton(
-            child: Text('Login Usuario'),
-            color: Colors.blue,
-            textColor: Colors.white,
-            shape: StadiumBorder(),
-            onPressed: () {
-              userLogin = UserLogin(
-                  email: emailCotroler.text, password: passwordControler.text);
-              getToken(userLogin).then((value) => {
-                    if (value != null)
-                      {Navigator.pushNamed(context, '/')}
-                    else
-                      {_mostrarAlerta(context)}
-                  });
-            },
-          ),
+          _crearBtnLogin(),
         ],
       ),
     );
@@ -95,8 +98,34 @@ class _LoginPageState extends State<LoginUsuarioPage> {
             icon: Icon(Icons.lock)));
   }
 
+// Crear  boton de login
+  Widget _crearBtnLogin() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: RaisedButton(
+        child: Text('Login'),
+        color: Colors.blue,
+        textColor: Colors.black,
+        shape: StadiumBorder(),
+        onPressed: () {
+          userLogin = UserLogin(
+              email: emailCotroler.text, password: passwordControler.text);
+          getToken(userLogin).then((value) => {
+                if (value != null)
+                  {Navigator.pushNamed(context, '/')}
+                else
+                  {_mostrarAlerta(context)}
+              });
+        },
+        padding: EdgeInsets.all(15.0),
+      ),
+    );
+  }
+
 // Metodo que estructura al momento de dar un click con una alerta
 // return un alerta
+//
   void _mostrarAlerta(BuildContext context) {
     showDialog(
       context: context,
