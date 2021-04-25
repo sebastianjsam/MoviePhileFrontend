@@ -13,6 +13,12 @@
             "ruta" : "Registro Usuario",
             "icon" : "input",
             "texto": "Registro Usuario"
+        },
+        {
+            "ruta" : "CommentFilm",
+            "icon" : "input",
+            "texto": "Comentar Pelicula"
+            
         }
         
 
