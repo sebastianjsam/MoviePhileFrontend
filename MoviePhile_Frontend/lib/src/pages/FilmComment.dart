@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/src/services/FilmCommentService.dart';
+import 'package:flutter_demo/src/utils/TextApp.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class CommentFilm extends StatefulWidget {
   @override
@@ -17,7 +20,8 @@ class _CommentFilmState extends State<CommentFilm> {
   @override
   Widget build(BuildContext context) {
     final _comentario = TextEditingController();
-    String _optionSelectString = "Nombre";
+    String _optionSelectString = "COMMENT";
+    String userID = "0a92d309-7651-46df-bd7e-f9a9a51fe3be";
 
     void _setOptionSelectedValue(String ValuesS) {
       setState(() {
@@ -42,21 +46,37 @@ class _CommentFilmState extends State<CommentFilm> {
                     "Comentario",
                     style: TextStyle(color: Colors.white70),
                   ),
-                  onPressed: () => Navigator.pop(context, options.COMMENT),
+                  onPressed: () async {
+                    Navigator.pop(context, options.COMMENT);
+                    final String registro = await filmcommentService
+                        .registerUser(_comentario.text, userID, 99566, 0);
+                    toast(TextApp.COMMENT_MADE);
+                  },
                 ),
                 SimpleDialogOption(
                   child: Text(
                     "Teorías",
                     style: TextStyle(color: Colors.white70),
                   ),
-                  onPressed: () => Navigator.pop(context, options.THEORIES),
+                  onPressed: () async {
+                    Navigator.pop(context, options.THEORIES);
+                    final String registro = await filmcommentService
+                        .registerUser(_comentario.text, userID, 99566, 1);
+                    toast(TextApp.COMMENT_MADE);
+                  },
                 ),
                 SimpleDialogOption(
                   child: Text(
                     "Huevos",
                     style: TextStyle(color: Colors.white70),
                   ),
-                  onPressed: () => Navigator.pop(context, options.EASTEREGGS),
+                  onPressed: () async {
+                    Navigator.pop(context, options.EASTEREGGS);
+                    final String registro = await filmcommentService
+                        .registerUser(_comentario.text, userID, 99566, 2);
+
+                    toast(TextApp.COMMENT_MADE);
+                  },
                 )
               ],
             );
@@ -71,6 +91,9 @@ class _CommentFilmState extends State<CommentFilm> {
 
         case options.EASTEREGGS:
           _setOptionSelectedValue('MAYBE');
+          break;
+
+        default:
           break;
       }
     }

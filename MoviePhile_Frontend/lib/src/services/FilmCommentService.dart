@@ -2,15 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter_demo/src/utils/TextApp.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart' as https;
 
-class ConnectionApi {
-  static String url =
-      TextApp.IP_BACKEND + TextApp.PORT_BACKEND + "/api/Auth/Register";
+class filmcommentService {
+  static String url = TextApp.IP_BACKEND +
+      TextApp.PORT_BACKEND +
+      "/api/FilmCommentControllerBase/CommentFilm";
   //
-  static Future<Map<String, dynamic>> RegisterUser(
-      String nameApellido, String nick, String email, String password) async {
-    var response = null;
+  static Future<String> registerUser(
+      String comentario, String userID, int filmId, int commentType) async {
+    var response;
+    print("tipo de comentario: " + commentType.toString());
+
     try {
       response = await http.post(
         Uri.parse(url),
@@ -18,21 +20,21 @@ class ConnectionApi {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode({
-          "content": "Comentario de la película",
-          "userId": "f6b17249-87d8-4778-bd37-bdac10cb7ed0",
-          "filmId": 5,
-          "commentType": 1
+          "content": comentario,
+          "userId": userID,
+          "filmId": filmId,
+          "commentType": commentType
         }),
       );
     } catch (e) {
       print("Error: Post");
     }
-    Map<String, dynamic> user = jsonDecode(response.body);
+    String user = response.body;
     if (response.statusCode == 200) {
-      user = jsonDecode(response.body);
+      user = response.body;
       return user;
     } else {
-      user = jsonDecode(response.body);
+      user = response.body;
       return user;
     }
   }
