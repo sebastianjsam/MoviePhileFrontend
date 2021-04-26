@@ -7,14 +7,15 @@ class filmcommentService {
   static String url = TextApp.IP_BACKEND +
       TextApp.PORT_BACKEND +
       "/api/FilmCommentControllerBase/CommentFilm";
-  //
+
   static Future<String> registerUser(
       String comentario, String userID, int filmId, int commentType) async {
     var response;
     print("tipo de comentario: " + commentType.toString());
-
+    print("Url: " + url);
     try {
-      response = await http.post(
+      response = await http
+          .post(
         Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -25,11 +26,16 @@ class filmcommentService {
           "filmId": filmId,
           "commentType": commentType
         }),
-      );
+      )
+          .catchError((error) {
+        print("Error: obteniendo datos");
+      });
     } catch (e) {
       print("Error: Post");
     }
+    print("body response: " + response.body);
     String user = response.body;
+    //response.closed();
     if (response.statusCode == 200) {
       user = response.body;
       return user;
@@ -38,7 +44,37 @@ class filmcommentService {
       return user;
     }
   }
+/*
+  static Future<Map<String, dynamic>> allCommentGet(int filmId) async {
+    var response;
 
+    url = TextApp.IP_BACKEND +
+        TextApp.PORT_BACKEND +
+        "/api/FilmCommentControllerBase/";
+    print("url de obtener comentarios: " +
+        url +
+        "AllCommentFilm?IdFilm=" +
+        filmId.toString());
+
+    try {
+      response = await http.get(
+        Uri.parse(url + "AllCommentFilm?IdFilm=" + filmId.toString()),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+    } catch (e) {
+      print("Error: Post");
+    }
+    Map<String, dynamic> user = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      return user;
+    } else {
+      print("Error: datos backend");
+      return user;
+    }
+  }
+*/
   /*static void Errores(var Errores) {
     var ErroresSeparados = Errores.split(',');
     String erroresPasword = "";

@@ -19,7 +19,7 @@ class _CommentFilmState extends State<CommentFilm> {
   ];
   @override
   Widget build(BuildContext context) {
-    final _comentario = TextEditingController();
+    final _comentario = TextEditingController(text: "vacio");
     String _optionSelectString = "COMMENT";
     String userID = "0a92d309-7651-46df-bd7e-f9a9a51fe3be";
 
@@ -203,6 +203,9 @@ class _CommentFilmState extends State<CommentFilm> {
                     ),
                   ),
                 ),
+                RaisedButton(onPressed: () {
+                  //var respon = filmcommentService.allCommentGet(399566);
+                })
               ],
             ),
           ),
