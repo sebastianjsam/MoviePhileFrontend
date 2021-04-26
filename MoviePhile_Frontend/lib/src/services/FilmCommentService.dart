@@ -8,14 +8,11 @@ class filmcommentService {
       TextApp.PORT_BACKEND +
       "/api/FilmCommentControllerBase/CommentFilm";
 
-  static Future<String> registerUser(
+  static Future<String> filmCommentSend(
       String comentario, String userID, int filmId, int commentType) async {
     var response;
-    print("tipo de comentario: " + commentType.toString());
-    print("Url: " + url);
     try {
-      response = await http
-          .post(
+      response = await http.post(
         Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -26,10 +23,7 @@ class filmcommentService {
           "filmId": filmId,
           "commentType": commentType
         }),
-      )
-          .catchError((error) {
-        print("Error: obteniendo datos");
-      });
+      );
     } catch (e) {
       print("Error: Post");
     }
@@ -44,7 +38,7 @@ class filmcommentService {
       return user;
     }
   }
-/*
+
   static Future<Map<String, dynamic>> allCommentGet(int filmId) async {
     var response;
 
@@ -66,6 +60,7 @@ class filmcommentService {
     } catch (e) {
       print("Error: Post");
     }
+    print("Json " + jsonDecode(response.body));
     Map<String, dynamic> user = jsonDecode(response.body);
     if (response.statusCode == 200) {
       return user;
@@ -74,7 +69,7 @@ class filmcommentService {
       return user;
     }
   }
-*/
+
   /*static void Errores(var Errores) {
     var ErroresSeparados = Errores.split(',');
     String erroresPasword = "";

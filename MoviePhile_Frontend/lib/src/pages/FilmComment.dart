@@ -22,6 +22,14 @@ class _CommentFilmState extends State<CommentFilm> {
     final _comentario = TextEditingController(text: "vacio");
     String _optionSelectString = "COMMENT";
     String userID = "0a92d309-7651-46df-bd7e-f9a9a51fe3be";
+    var _lista2;
+
+    Future<void> _allcommentGet() async {
+      _lista2 = await filmcommentService.allCommentGet(399566);
+      print(_lista2);
+    }
+
+    //_allcommentGet();
 
     void _setOptionSelectedValue(String ValuesS) {
       setState(() {
@@ -49,8 +57,9 @@ class _CommentFilmState extends State<CommentFilm> {
                   onPressed: () async {
                     Navigator.pop(context, options.COMMENT);
                     final String registro = await filmcommentService
-                        .registerUser(_comentario.text, userID, 99566, 0);
+                        .filmCommentSend(_comentario.text, userID, 399566, 0);
                     toast(TextApp.COMMENT_MADE);
+                    _lista.add(_comentario.text);
                   },
                 ),
                 SimpleDialogOption(
@@ -61,8 +70,9 @@ class _CommentFilmState extends State<CommentFilm> {
                   onPressed: () async {
                     Navigator.pop(context, options.THEORIES);
                     final String registro = await filmcommentService
-                        .registerUser(_comentario.text, userID, 99566, 1);
+                        .filmCommentSend(_comentario.text, userID, 399566, 1);
                     toast(TextApp.COMMENT_MADE);
+                    _lista.add(_comentario.text);
                   },
                 ),
                 SimpleDialogOption(
@@ -73,7 +83,8 @@ class _CommentFilmState extends State<CommentFilm> {
                   onPressed: () async {
                     Navigator.pop(context, options.EASTEREGGS);
                     final String registro = await filmcommentService
-                        .registerUser(_comentario.text, userID, 99566, 2);
+                        .filmCommentSend(_comentario.text, userID, 399566, 2);
+                    _lista.add(_comentario.text);
 
                     toast(TextApp.COMMENT_MADE);
                   },
@@ -204,7 +215,8 @@ class _CommentFilmState extends State<CommentFilm> {
                   ),
                 ),
                 RaisedButton(onPressed: () {
-                  //var respon = filmcommentService.allCommentGet(399566);
+                  var respon = filmcommentService.filmCommentSend(
+                      "Comentario de la película", userID, 399566, 1);
                 })
               ],
             ),
