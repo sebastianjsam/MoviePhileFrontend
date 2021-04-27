@@ -150,9 +150,5 @@ class _RegistroPageState extends State<RegistroPage> {
 
 // Metodo que estructura el campo texto que nuestra los campo que se estan escribiendo
 // return el campo un texto
-  Widget _crearPersona() {
-    return ListTile(
-      title: Text('Nombre es: $_nombre' + ' Apellido es $_apellido'),
-    );
-  }
+
 }
