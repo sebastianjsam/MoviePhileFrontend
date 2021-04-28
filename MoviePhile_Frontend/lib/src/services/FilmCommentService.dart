@@ -1,15 +1,14 @@
 import 'dart:convert';
-
+import 'package:flutter_demo/src/Model/Film.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
 import 'package:http/http.dart' as http;
 
-class filmcommentService {
-  static String url = TextApp.IP_BACKEND +
-      TextApp.PORT_BACKEND +
-      "/api/FilmCommentControllerBase/CommentFilm";
-
+class FilmcommentService {
   static Future<String> filmCommentSend(
       String comentario, String userID, int filmId, int commentType) async {
+    String url = TextApp.IP_BACKEND + TextApp.PORT_BACKEND;
+    url += "/api/FilmCommentControllerBase/CommentFilm";
+    print("url: " + url);
     var response;
     try {
       response = await http.post(
@@ -25,48 +24,42 @@ class filmcommentService {
         }),
       );
     } catch (e) {
-      print("Error: Post");
+      throw ("filmCommentSend: Error Post, quizas Backend no disponible");
     }
-    print("body response: " + response.body);
     String user = response.body;
-    //response.closed();
+    print("user " + user);
+    print("response.body " + response.body.toString());
     if (response.statusCode == 200) {
-      user = response.body;
-      return user;
+      return user.toString();
     } else {
-      user = response.body;
-      return user;
+      //throw ("filmCommentSend: Error leyendo datos del backend state!=200");
     }
   }
 
-  static Future<Map<String, dynamic>> allCommentGet(int filmId) async {
+  static Future<Film> allCommentGetFilm(int filmId) async {
     var response;
-
-    url = TextApp.IP_BACKEND +
-        TextApp.PORT_BACKEND +
-        "/api/FilmCommentControllerBase/";
-    print("url de obtener comentarios: " +
-        url +
-        "AllCommentFilm?IdFilm=" +
-        filmId.toString());
+    String url = TextApp.IP_BACKEND + TextApp.PORT_BACKEND;
+    url += "/api/Movies?movieId=" + filmId.toString();
 
     try {
       response = await http.get(
-        Uri.parse(url + "AllCommentFilm?IdFilm=" + filmId.toString()),
+        Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer ' + TextApp.TOKEN_TEMPORAL
         },
       );
     } catch (e) {
-      print("Error: Post");
+      throw ("allCommentGetFilm: Error Get, quizas Backend no disponible");
     }
-    print("Json " + jsonDecode(response.body));
-    Map<String, dynamic> user = jsonDecode(response.body);
+
+    var jsonResponse = json.decode(response.body);
+    var objectResponse = Film.fromJson(jsonResponse);
     if (response.statusCode == 200) {
-      return user;
+      return objectResponse;
     } else {
       print("Error: datos backend");
-      return user;
+      throw ("allCommentGetFilm: Error leyendo datos del backend state!=200");
     }
   }
 
