@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/src/Model/Film.dart';
+import 'package:flutter_demo/src/Model/FilmS.dart';
 import 'package:flutter_demo/src/services/FilmCommentService.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -12,7 +12,7 @@ class CommentFilm extends StatefulWidget {
 enum options { COMMENT, THEORIES, EASTEREGGS }
 
 class _CommentFilmState extends State<CommentFilm> {
-  Future<Film> _filcomentList;
+  Future<FilmS> _filcomentList;
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,7 @@ class _CommentFilmState extends State<CommentFilm> {
         body: Container(
           color: Colors.grey,
           child: SingleChildScrollView(
-            child: FutureBuilder<Film>(
+            child: FutureBuilder<FilmS>(
                 future: _filcomentList,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {

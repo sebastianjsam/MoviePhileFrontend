@@ -3,7 +3,7 @@ import 'dart:core';
 import 'Comments.dart';
 import 'Genre.dart';
 
-class Film {
+class FilmS {
   int id;
   String title;
   String overView;
@@ -12,7 +12,7 @@ class Film {
   Genre genre;
   List<Comments> comments;
 
-  Film(
+  FilmS(
       {this.id,
       this.title,
       this.overView,
@@ -21,12 +21,12 @@ class Film {
       this.genre,
       this.comments});
 
-  factory Film.fromJson(Map<String, dynamic> json) {
+  factory FilmS.fromJson(Map<String, dynamic> json) {
     print("Comments: " + json['comments'].toString());
 
     var commentsFromJson = json['comments'];
     List<Comments> commentsList = commentsFromJson.cast<Comments>();
-    return Film(
+    return FilmS(
         id: json['id'],
         title: json['title'],
         overView: json['overview'],

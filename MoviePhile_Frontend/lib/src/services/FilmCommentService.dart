@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_demo/src/Model/Film.dart';
+import 'package:flutter_demo/src/Model/FilmS.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
 import 'package:http/http.dart' as http;
 
@@ -36,7 +36,7 @@ class FilmcommentService {
     }
   }
 
-  static Future<Film> allCommentGetFilm(int filmId) async {
+  static Future<FilmS> allCommentGetFilm(int filmId) async {
     var response;
     String url = TextApp.IP_BACKEND + TextApp.PORT_BACKEND;
     url += "/api/Movies?movieId=" + filmId.toString();
@@ -54,7 +54,7 @@ class FilmcommentService {
     }
 
     var jsonResponse = json.decode(response.body);
-    var objectResponse = Film.fromJson(jsonResponse);
+    var objectResponse = FilmS.fromJson(jsonResponse);
     if (response.statusCode == 200) {
       return objectResponse;
     } else {
