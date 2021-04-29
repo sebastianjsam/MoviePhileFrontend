@@ -19,6 +19,13 @@
             "icon" : "input",
             "texto": "Comentar Pelicula"
             
+      },
+        {
+            
+            "ruta" : "Consultar Titulo",
+            "icon" : "input",
+            "texto": "Consultar Titulo"
+
         }
         
 
