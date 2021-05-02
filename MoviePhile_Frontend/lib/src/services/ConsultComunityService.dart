@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Comunity.dart';
 import 'package:flutter_demo/src/Model/Film.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
