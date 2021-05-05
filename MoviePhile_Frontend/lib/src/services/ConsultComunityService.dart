@@ -19,7 +19,7 @@ class ConsultComunityService {
  */
 
   Future<List<Comunity>> getAllComunity() async {
-    HttpOverrides.global = new MyHttpOverrides();
+    // HttpOverrides.global = new MyHttpOverrides();
     final response = await http.get(Uri.parse(url),
         headers: {'Authorization': 'Bearer ' + TextApp.TOKEN_TEMPORAL});
     List<Comunity> comunityList = [];
@@ -32,13 +32,14 @@ class ConsultComunityService {
       addComunity(jsonData, comunityList, path_img);
       return comunityList;
     } else {
-      throw Exception("Falló la conexion");
+      print("Null primer llaamdo");
+      return null;
     }
   }
 
   Future<List<Comunity>> getComunityByName(String title) async {
     String url = 'https://10.0.2.2:5001/api/Community/' + title;
-    HttpOverrides.global = new MyHttpOverrides();
+    //HttpOverrides.global = new MyHttpOverrides();
     final response = await http.get(Uri.parse(url),
         headers: {'Authorization': 'Bearer ' + TextApp.TOKEN_TEMPORAL});
     List<Comunity> comunityList = [];
@@ -56,7 +57,7 @@ class ConsultComunityService {
       addComunity(jsonData, comunityList, path_img);
       return comunityList;
     } else {
-      throw Exception("Falló la conexion");
+      return null;
     }
   }
 
