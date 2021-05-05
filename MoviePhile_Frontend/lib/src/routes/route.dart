@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
 import 'package:flutter_demo/src/pages/LoginUsuario_page.dart';
 import 'package:flutter_demo/src/pages/Principal.dart';
@@ -16,5 +17,6 @@ Map<String, WidgetBuilder> getObtenerRutas() {
 
     'Consultar Titulo': (BuildContext context) => ConsultarPage(),
 
+    'ConsultComunity': (BuildContext context) => ConsultComunityPage(),
   };
 }
