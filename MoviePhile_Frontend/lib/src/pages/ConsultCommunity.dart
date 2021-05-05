@@ -52,39 +52,43 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
               ),
             ],
           ),
-          body: Column(
-            children: [
-              FutureBuilder<List<Comunity>>(
-                future: _listadoFilms,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Column(
-                      children: [
-                        Container(
-                            child: Text(
-                          "Comunidades",
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold),
-                        )),
-                        Container(
-                          //width: MediaQuery.of(context).size.width * 0.5,
-                          child: _listComunity(snapshot),
-                        ),
-                      ],
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                FutureBuilder<List<Comunity>>(
+                  future: _listadoFilms,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                              child: Text(
+                            "Comunidades",
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold),
+                          )),
+                          Container(
+                            height: MediaQuery.of(context).size.height,
+                            child: _listComunity(snapshot),
+                          ),
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text(
+                        "error",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      );
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
                     );
-                  } else if (snapshot.hasError) {
-                    return Text(
-                      "error",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    );
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-            ],
+                  },
+                ),
+              ],
+            ),
           )),
     );
   }
@@ -95,7 +99,6 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
         scrollDirection:
             Axis.vertical, //obligatorio declarar width para evitar error
         //reverse: true,
-        //scrollDirection: Axis.vertical,
         shrinkWrap: true,
         itemCount: snapshot.data.length,
         itemBuilder: (BuildContext context, int index) {
@@ -147,50 +150,5 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
             ),
           );
         });
-  }
-
-  List<Widget> _listFilms(List<Comunity> data) {
-    List<Widget> films = [];
-    for (var film in data) {
-      films.add(Container(
-        width: MediaQuery.of(context).size.width * 0.5,
-        height: MediaQuery.of(context).size.height * 0.2,
-        child: Card(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Text(
-                  film.name,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                      color: Colors.red),
-                  textAlign: TextAlign.center,
-                )),
-            //Expanded(child: Image.network(film.urlImage, fit: BoxFit.fill)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ButtonTheme(
-                  minWidth: 10.0,
-                  height: 25.0,
-                  child: FlatButton(
-                    child: Text("Details"),
-                    splashColor: Colors.blue,
-                    color: Colors.blueAccent,
-                    onPressed: () {},
-                  ),
-                )
-              ],
-            )
-          ],
-        )),
-      ));
-    }
-    return films;
   }
 }
