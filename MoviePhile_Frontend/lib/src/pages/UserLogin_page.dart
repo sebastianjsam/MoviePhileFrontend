@@ -53,7 +53,7 @@ class _LoginPageState extends State<UserLogin_page> {
           _buildPassword(),
           Divider(),
           _buildBtnLogin(),
-          //  Divider(),
+          Divider(),
           _buildSignupBtn(),
         ],
       ),
