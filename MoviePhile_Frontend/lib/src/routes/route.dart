@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
 import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/pages/Principal.dart';
@@ -15,5 +16,10 @@ Map<String, WidgetBuilder> getRoutes() {
     'CommentFilm': (BuildContext context) => CommentFilm(),
 
     'Consultar Titulo': (BuildContext context) => ConsultarPage(),
+<<<<<<< HEAD
+=======
+
+    'ConsultComunity': (BuildContext context) => ConsultComunityPage(),
+>>>>>>> dedee66daa0ca3931c3cf047a51ad0db1c21b8da
   };
 }
