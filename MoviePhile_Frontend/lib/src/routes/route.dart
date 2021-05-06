@@ -16,10 +16,7 @@ Map<String, WidgetBuilder> getRoutes() {
     'CommentFilm': (BuildContext context) => CommentFilm(),
 
     'Consultar Titulo': (BuildContext context) => ConsultarPage(),
-<<<<<<< HEAD
-=======
 
     'ConsultComunity': (BuildContext context) => ConsultComunityPage(),
->>>>>>> dedee66daa0ca3931c3cf047a51ad0db1c21b8da
   };
 }
