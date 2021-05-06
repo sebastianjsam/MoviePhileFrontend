@@ -3,7 +3,7 @@
     "rutas" : [
 
         {
-            "ruta" : "login Usuario",
+            "ruta" : "User Login",
             "icon" : "input",
             "texto": "Login Usuario"
         },
