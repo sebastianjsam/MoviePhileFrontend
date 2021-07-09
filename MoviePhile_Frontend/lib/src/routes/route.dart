@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
-import 'package:flutter_demo/src/pages/LoginUsuario_page.dart';
+import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/pages/Principal.dart';
 import 'package:flutter_demo/src/pages/Registro_page.dart';
 import 'package:flutter_demo/src/pages/ConsultarTitulo_page.dart';
+import 'package:flutter_demo/src/pages/Registrar_Comunidad.dart';
 
-Map<String, WidgetBuilder> getObtenerRutas() {
+Map<String, WidgetBuilder> getRoutes() {
   return <String, WidgetBuilder>{
     //Rutas a las cuales estan creadas y que podemos acceder
     '/': (BuildContext context) => Principal(),
-    'login Usuario': (BuildContext context) => LoginUsuarioPage(),
+    'User Login': (BuildContext context) => UserLogin_page(),
+
     'Registro Usuario': (BuildContext context) => RegistroPage(),
+
+    'Registrar Comunidad': (BuildContext context) => Registrar_Comunidad(),
 
     'CommentFilm': (BuildContext context) => CommentFilm(),
 
