@@ -18,7 +18,7 @@
             "texto": "Comentar Pelicula"
       },
         {
-            "ruta" : "Consultar Titulo",
+            "ruta" : "Search Title",
             "icon" : "input",
             "texto": "Consultar Titulo"
         },

@@ -12,6 +12,8 @@ Map<String, WidgetBuilder> getObtenerRutas() {
     '/': (BuildContext context) => Principal(),
     'login Usuario': (BuildContext context) => LoginUsuarioPage(),
     'Registro Usuario': (BuildContext context) => RegistroPage(),
+    'Search Title': (BuildContext context) => SearchPage(),
+
 
     'CommentFilm': (BuildContext context) => CommentFilm(),
 
