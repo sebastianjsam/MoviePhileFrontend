@@ -26,6 +26,11 @@
             "ruta" : "ConsultComunity",
             "icon" : "input",
             "texto": "Consultar Comunidad"
+        },
+        {
+            "ruta" : "Registrar Comunidad",
+            "icon" : "input",
+            "texto": "Registrar Comunidad"
         }
         
 
