@@ -171,7 +171,7 @@ class _CommentFilmState extends State<CommentFilm> {
     if (registro.contains("true")) {
       toast(TextApp.COMMENT_MADE);
       //falta agregar el comentario sin tener que consultar a la base de datos.
-      //
+      _filcomentList = FilmcommentService.allCommentGetFilm(fiml);
       //fin
       setState(() {});
     }
