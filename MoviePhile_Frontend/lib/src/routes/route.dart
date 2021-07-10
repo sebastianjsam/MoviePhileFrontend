@@ -14,10 +14,9 @@ Map<String, WidgetBuilder> getObtenerRutas() {
     'Registro Usuario': (BuildContext context) => RegistroPage(),
     'Search Title': (BuildContext context) => SearchPage(),
 
-
     'CommentFilm': (BuildContext context) => CommentFilm(),
 
-    'Consultar Titulo': (BuildContext context) => ConsultarPage(),
+    'Consultar Titulo': (BuildContext context) => SearchPage(),
 
     'ConsultComunity': (BuildContext context) => ConsultComunityPage(),
   };
