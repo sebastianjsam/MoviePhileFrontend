@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 final _base = Environment.baseUrl;
 final _tokenEndpoint = "/auth/login";
 final _url = _base + _tokenEndpoint;
-
+String token;
 Future<Token> getToken(UserLogin userLogin) async {
   print("La url..............." + _url);
   final http.Response response = await http.post(
