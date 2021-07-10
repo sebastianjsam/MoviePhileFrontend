@@ -10,10 +10,11 @@ class CommentFilm extends StatefulWidget {
 }
 
 enum options { COMMENT, THEORIES, EASTEREGGS }
+int fiml = 0;
 
 class _CommentFilmState extends State<CommentFilm> {
   Future<FilmS> _filcomentList;
-  int fiml = 0;
+
   @override
   void initState() {
     super.initState();
@@ -172,6 +173,7 @@ class _CommentFilmState extends State<CommentFilm> {
       //falta agregar el comentario sin tener que consultar a la base de datos.
       //
       //fin
+      setState(() {});
     }
   }
 
@@ -196,9 +198,12 @@ class _CommentFilmState extends State<CommentFilm> {
                   Navigator.pop(context, options.COMMENT);
                   final String registro =
                       await FilmcommentService.filmCommentSend(
-                          _comentario.text, userID, 399566, 0);
+                          _comentario.text, userID, fiml, 0);
 
-                  succesfullComment(registro);
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    succesfullComment(registro);
+                    setState(() {});
+                  });
                 },
               ),
               SimpleDialogOption(
@@ -210,7 +215,7 @@ class _CommentFilmState extends State<CommentFilm> {
                   Navigator.pop(context, options.THEORIES);
                   final String registro =
                       await FilmcommentService.filmCommentSend(
-                          _comentario.text, userID, 399566, 1);
+                          _comentario.text, userID, fiml, 1);
                   succesfullComment(registro);
                   //falta agregar el comentario sin tener que consultar a la base de datos.
                   //
@@ -226,7 +231,7 @@ class _CommentFilmState extends State<CommentFilm> {
                   Navigator.pop(context, options.EASTEREGGS);
                   final String registro =
                       await FilmcommentService.filmCommentSend(
-                          _comentario.text, userID, 399566, 2);
+                          _comentario.text, userID, fiml, 2);
                   succesfullComment(registro);
                 },
               )

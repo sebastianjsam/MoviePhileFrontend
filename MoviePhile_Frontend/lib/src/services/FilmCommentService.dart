@@ -7,7 +7,7 @@ class FilmcommentService {
   static Future<String> filmCommentSend(
       String comentario, String userID, int filmId, int commentType) async {
     String url = TextApp.IP_BACKEND + TextApp.PORT_BACKEND;
-    url += "/api/FilmCommentControllerBase/CommentFilm";
+    url += "/api/FilmComment";
     print("url: " + url);
     var response;
     try {
