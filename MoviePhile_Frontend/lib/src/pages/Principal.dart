@@ -7,7 +7,6 @@ class Principal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         centerTitle: true,
         title: Column(children: [
           Text("MoviePhile"),

@@ -12,14 +12,14 @@ Map<String, WidgetBuilder> getRoutes() {
     //Rutas a las cuales estan creadas y que podemos acceder
     '/': (BuildContext context) => Principal(),
     'User Login': (BuildContext context) => UserLogin_page(),
-
     'Registro Usuario': (BuildContext context) => RegistroPage(),
+    'Search Title': (BuildContext context) => SearchPage(),
 
     'Registrar Comunidad': (BuildContext context) => Registrar_Comunidad(),
 
     'CommentFilm': (BuildContext context) => CommentFilm(),
 
-    'Consultar Titulo': (BuildContext context) => ConsultarPage(),
+    'Consultar Titulo': (BuildContext context) => SearchPage(),
 
     'ConsultComunity': (BuildContext context) => ConsultComunityPage(),
   };
