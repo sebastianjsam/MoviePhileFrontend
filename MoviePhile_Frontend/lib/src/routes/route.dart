@@ -12,10 +12,11 @@ Map<String, WidgetBuilder> getRoutes() {
     '/': (BuildContext context) => Principal(),
     'User Login': (BuildContext context) => UserLogin_page(),
     'Registro Usuario': (BuildContext context) => RegistroPage(),
+    'Search Title': (BuildContext context) => SearchPage(),
 
     'CommentFilm': (BuildContext context) => CommentFilm(),
 
-    'Consultar Titulo': (BuildContext context) => ConsultarPage(),
+    'Consultar Titulo': (BuildContext context) => SearchPage(),
 
     'ConsultComunity': (BuildContext context) => ConsultComunityPage(),
   };
