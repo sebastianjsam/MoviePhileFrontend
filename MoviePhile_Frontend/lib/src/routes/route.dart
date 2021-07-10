@@ -5,6 +5,7 @@ import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/pages/Principal.dart';
 import 'package:flutter_demo/src/pages/Registro_page.dart';
 import 'package:flutter_demo/src/pages/ConsultarTitulo_page.dart';
+import 'package:flutter_demo/src/pages/Registrar_Comunidad.dart';
 
 Map<String, WidgetBuilder> getRoutes() {
   return <String, WidgetBuilder>{
@@ -13,6 +14,8 @@ Map<String, WidgetBuilder> getRoutes() {
     'User Login': (BuildContext context) => UserLogin_page(),
     'Registro Usuario': (BuildContext context) => RegistroPage(),
     'Search Title': (BuildContext context) => SearchPage(),
+
+    'Registrar Comunidad': (BuildContext context) => Registrar_Comunidad(),
 
     'CommentFilm': (BuildContext context) => CommentFilm(),
 
