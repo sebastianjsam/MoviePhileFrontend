@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Comunity.dart';
 import 'package:flutter_demo/src/services/ConsultComunityService.dart';
@@ -60,8 +61,8 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        //mainAxisSize: MainAxisSize.min,
+                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Container(
                               child: Text(
@@ -70,7 +71,7 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           )),
                           Container(
-                            height: MediaQuery.of(context).size.height,
+                            //height: MediaQuery.of(context).size.height,
                             child: _listComunity(snapshot),
                           ),
                         ],
@@ -83,7 +84,13 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
                       );
                     }
                     return Center(
-                      child: CircularProgressIndicator(),
+                      heightFactor: 15,
+                      child: Container(
+                        //height: MediaQuery.of(context).size.height / 2,
+                        child: CircularProgressIndicator.adaptive(
+                          strokeWidth: 6,
+                        ),
+                      ),
                     );
                   },
                 ),

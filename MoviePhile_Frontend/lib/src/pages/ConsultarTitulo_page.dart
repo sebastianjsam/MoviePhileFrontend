@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Film.dart';
-import 'package:flutter_demo/src/services/consultarTitulo_service.dart';
+import 'package:flutter_demo/src/services/SearchTitle_service.dart';
 
-class ConsultarPage extends StatefulWidget {
+class SearchPage extends StatefulWidget {
   @override
-  _ConsultarPageState createState() => _ConsultarPageState();
+  _SearchPageState createState() => _SearchPageState();
 }
 
-class _ConsultarPageState extends State<ConsultarPage> {
-  consultarTitulo_service consultartituloservice = consultarTitulo_service();
+class _SearchPageState extends State<SearchPage> {
+  searchTitle_service searchtitleservice = searchTitle_service();
   final myController = TextEditingController();
-  Future<List<Film>> _listadoFilms;
+  Future<List<Film>> _filmsList;
 
   @override
   void initState() {
     super.initState();
-    _listadoFilms = consultartituloservice.getFilms();
+    _filmsList = searchtitleservice.getFilms();
   }
 
   @override
@@ -27,7 +27,7 @@ class _ConsultarPageState extends State<ConsultarPage> {
             title: TextField(
               controller: myController,
               decoration: InputDecoration(
-                  hintText: "search",
+                  hintText: "Buscar",
                   labelStyle: TextStyle(fontSize: 24, color: Colors.black),
                   border: InputBorder.none,
                   fillColor: Colors.blue.shade200,
@@ -43,15 +43,15 @@ class _ConsultarPageState extends State<ConsultarPage> {
                 icon: Icon(Icons.search),
                 onPressed: () {
                   print(myController.text);
-                  _listadoFilms =
-                      consultartituloservice.getFilmsByName(myController.text);
+                  _filmsList =
+                      searchtitleservice.getFilmsByName(myController.text);
                   setState(() {});
                 },
               ),
             ],
           ),
           body: FutureBuilder<List<Film>>(
-            future: _listadoFilms,
+            future: _filmsList,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return GridView.count(
@@ -94,7 +94,7 @@ class _ConsultarPageState extends State<ConsultarPage> {
                 minWidth: 10.0,
                 height: 25.0,
                 child: FlatButton(
-                  child: Text("Details"),
+                  child: Text("Detalle"),
                   splashColor: Colors.blue,
                   color: Colors.blueAccent,
                   onPressed: () {},

@@ -1,16 +1,14 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Film.dart';
+import 'package:flutter_demo/src/utils/TextApp.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../../main.dart';
 
-class consultarTitulo_service {
-  Future<List<Film>> _listadoFilms;
-  String token =
-      'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImE1MzI3MTMwLWQxYWYtNDFjYi1iNTFlLTQ4Y2ZhZTI3ZmUxYyIsInN1YiI6ImVzdGViYW5AZ21haWwuY29tIiwiZW1haWwiOiJlc3RlYmFuQGdtYWlsLmNvbSIsImp0aSI6ImZkMWVkMzM5LWRmOTUtNGU4MS1iYzc1LTA2OWQyZWQwOTgyZCIsIm5iZiI6MTYxOTI5NjQ1OCwiZXhwIjoxNjE5MzE4MDU4LCJpYXQiOjE2MTkyOTY0NTh9.TOhG__ay2Z-I4oRSxSoMShClLcziF-vMkmuBUmubKpCbdQk_UQF_sE1Kn6H9Qe31GJV38aZTmjQzn7MhF7sHfw';
+class searchTitle_service {
+  String token = TextApp.TOKEN_TEMPORAL;
 /**
    * Método que obtiene por medio de una petición get los datos de las películas y 
    * series alojados en el API de la plataforma TMDB ya que estos van a ser mostrados 

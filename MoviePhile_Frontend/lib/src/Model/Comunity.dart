@@ -42,4 +42,7 @@ class Comunity {
     }
     return usersList2;
   }
+
+  Map<String, dynamic> toJson() =>
+      {"name": this.name, "description": this.description};
 }
