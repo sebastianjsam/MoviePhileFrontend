@@ -16,7 +16,7 @@ Future<Token> getToken(UserLogin userLogin) async {
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    //body: jsonEncode(userLogin.toJson()),
+    body: jsonEncode(userLogin.toJson()),
   );
 
   if (response.statusCode == 200) {
