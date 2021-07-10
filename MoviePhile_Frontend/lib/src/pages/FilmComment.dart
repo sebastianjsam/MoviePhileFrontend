@@ -13,16 +13,26 @@ enum options { COMMENT, THEORIES, EASTEREGGS }
 
 class _CommentFilmState extends State<CommentFilm> {
   Future<FilmS> _filcomentList;
+  int fiml = 0;
   @override
   void initState() {
     super.initState();
-    _filcomentList = FilmcommentService.allCommentGetFilm(399566);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fiml = ModalRoute.of(context).settings.arguments;
+      _filcomentList = FilmcommentService.allCommentGetFilm(fiml);
+      setState(() {});
+    });
   }
+
+  @override
+  void didInitState() {}
 
   @override
   Widget build(BuildContext context) {
     String userID = "0a92d309-7651-46df-bd7e-f9a9a51fe3be";
     final _comentario = TextEditingController(text: "vacio");
+    print(ModalRoute.of(context).settings.arguments);
 
     return SafeArea(
       child: Scaffold(
@@ -156,7 +166,7 @@ class _CommentFilmState extends State<CommentFilm> {
   }
 
   void succesfullComment(registro) {
-    print("registro: " + registro);
+    //print("registro: " + registro);
     if (registro.contains("true")) {
       toast(TextApp.COMMENT_MADE);
       //falta agregar el comentario sin tener que consultar a la base de datos.
