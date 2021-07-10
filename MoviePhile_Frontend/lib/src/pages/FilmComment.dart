@@ -4,6 +4,8 @@ import 'package:flutter_demo/src/services/FilmCommentService.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
 import 'package:overlay_support/overlay_support.dart';
 
+import 'menulateral.dart';
+
 class CommentFilm extends StatefulWidget {
   @override
   _CommentFilmState createState() => _CommentFilmState();
@@ -31,13 +33,14 @@ class _CommentFilmState extends State<CommentFilm> {
 
   @override
   Widget build(BuildContext context) {
-    String userID = "0a92d309-7651-46df-bd7e-f9a9a51fe3be";
-    final _comentario = TextEditingController(text: "vacio");
+    String userID = "cf282ca3-4017-4778-9999-454faaf3cc15";
+    final _comentario = TextEditingController(text: "");
     print(ModalRoute.of(context).settings.arguments);
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: Text("MoviePhile")),
+        // drawer: MenuLateral(),
         body: Container(
           color: Colors.grey,
           child: SingleChildScrollView(
@@ -142,7 +145,7 @@ class _CommentFilmState extends State<CommentFilm> {
         child: Row(
           children: [
             Text(
-              userID,
+              "Jsam@gmail.com",
               style: TextStyle(),
             ),
           ],
@@ -168,6 +171,7 @@ class _CommentFilmState extends State<CommentFilm> {
 
   void succesfullComment(registro) {
     //print("registro: " + registro);
+
     if (registro.contains("true")) {
       toast(TextApp.COMMENT_MADE);
       //falta agregar el comentario sin tener que consultar a la base de datos.
@@ -196,12 +200,11 @@ class _CommentFilmState extends State<CommentFilm> {
                 ),
                 onPressed: () async {
                   Navigator.pop(context, options.COMMENT);
-                  final String registro =
-                      await FilmcommentService.filmCommentSend(
-                          _comentario.text, userID, fiml, 0);
+                  String registro = await FilmcommentService.filmCommentSend(
+                      _comentario.text, userID, fiml, 0);
 
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    succesfullComment(registro);
+                  WidgetsBinding.instance.addPostFrameCallback((_) async {
+                    succesfullComment(await registro);
                     setState(() {});
                   });
                 },
@@ -213,9 +216,8 @@ class _CommentFilmState extends State<CommentFilm> {
                 ),
                 onPressed: () async {
                   Navigator.pop(context, options.THEORIES);
-                  final String registro =
-                      await FilmcommentService.filmCommentSend(
-                          _comentario.text, userID, fiml, 1);
+                  String registro = await FilmcommentService.filmCommentSend(
+                      _comentario.text, userID, fiml, 1);
                   succesfullComment(registro);
                   //falta agregar el comentario sin tener que consultar a la base de datos.
                   //
@@ -229,9 +231,8 @@ class _CommentFilmState extends State<CommentFilm> {
                 ),
                 onPressed: () async {
                   Navigator.pop(context, options.EASTEREGGS);
-                  final String registro =
-                      await FilmcommentService.filmCommentSend(
-                          _comentario.text, userID, fiml, 2);
+                  String registro = await FilmcommentService.filmCommentSend(
+                      _comentario.text, userID, fiml, 2);
                   succesfullComment(registro);
                 },
               )

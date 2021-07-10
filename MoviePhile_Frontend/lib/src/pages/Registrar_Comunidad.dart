@@ -5,60 +5,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Comunity.dart';
 import 'package:flutter_demo/src/services/RegistrarComunidadService.dart';
 
-class Registrar_Comunidad extends StatefulWidget{
+class Registrar_Comunidad extends StatefulWidget {
   @override
   _Registrar_Comunidad createState() => _Registrar_Comunidad();
-
 }
 
 class _Registrar_Comunidad extends State<Registrar_Comunidad> {
-
   String name;
   String description;
   Comunity comunity;
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
-      appBar: AppBar(
-          title: Text("Registrar comunidad")
-      ),
+      appBar: AppBar(title: Text("Registrar comunidad")),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
-            _setName(),
-            Divider(),
-            _setDescription(),
-            RaisedButton(
-              child: Text('Crear'),
-              color: Colors.blue,
-              textColor: Colors.white,
-              shape: StadiumBorder(),
-              onPressed: () {
-                comunity = Comunity(id: 999, name: name, description: description, genres: null, publications: null, users: null);
+          _setName(),
+          Divider(),
+          _setDescription(),
+          RaisedButton(
+            child: Text('Crear'),
+            color: Colors.blue,
+            textColor: Colors.white,
+            shape: StadiumBorder(),
+            onPressed: () {
+              comunity = Comunity(
+                  id: 999,
+                  name: name,
+                  description: description,
+                  genres: null,
+                  publications: null,
+                  users: null);
 
-                POSTRegistrarComunidad(comunity).then((value) => {
-
-                  if(value){
-                    _buildAlert(context, "Creada...", "Crear comunidad.")
-                  }else{
-                    _buildAlert(context, "Error...", "No se pudo crear la comunidad.")
-                  }
-
-                });
-
-              },
-            )
-
-
+              POSTRegistrarComunidad(comunity).then((value) => {
+                    if (value)
+                      {_buildAlert(context, "Creada...", "Crear comunidad.")}
+                    else
+                      {
+                        _buildAlert(context, "Error...",
+                            "No se pudo crear la comunidad.")
+                      }
+                  });
+            },
+          )
         ],
       ),
     );
   }
-
-
 
   Widget _setName() {
     return TextField(
@@ -73,18 +68,13 @@ class _Registrar_Comunidad extends State<Registrar_Comunidad> {
           icon: Icon(Icons.add)),
       onChanged: (valor) {
         setState(() {
-             name = valor;
+          name = valor;
         });
       },
-
-
-
     );
   }
 
-
-  Widget _setDescription(){
-
+  Widget _setDescription() {
     return TextField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -100,12 +90,8 @@ class _Registrar_Comunidad extends State<Registrar_Comunidad> {
           description = valor;
         });
       },
-
-
-
     );
   }
-
 
   void _buildAlert(BuildContext context, String titulo, String mensaje) {
     showDialog(
@@ -114,7 +100,7 @@ class _Registrar_Comunidad extends State<Registrar_Comunidad> {
       builder: (context) {
         return AlertDialog(
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           title: Text(titulo),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -128,14 +114,11 @@ class _Registrar_Comunidad extends State<Registrar_Comunidad> {
                 child: Text('OK'),
                 onPressed: () {
                   // Navigator.pop(context);
-                  Navigator.pushNamed(context, '/');
+                  Navigator.pushNamed(context, 'ConsultComunity');
                 })
           ],
         );
       },
     );
   }
-
-
-
 }
