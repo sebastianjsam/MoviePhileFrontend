@@ -7,31 +7,6 @@
             "icon" : "input",
             "texto": "Login Usuario"
         },
-        {
-            "ruta" : "Registro Usuario",
-            "icon" : "input",
-            "texto": "Registro Usuario"
-        },
-        {
-            "ruta" : "CommentFilm",
-            "icon" : "input",
-            "texto": "Comentar Pelicula"
-      },
-        {
-            "ruta" : "Search Title",
-            "icon" : "input",
-            "texto": "Consultar Titulo"
-        },
-        {
-            "ruta" : "ConsultComunity",
-            "icon" : "input",
-            "texto": "Consultar Comunidad"
-        },
-        {
-            "ruta" : "Registrar Comunidad",
-            "icon" : "input",
-            "texto": "Registrar Comunidad"
-        }
         
 
     ]
