@@ -33,7 +33,7 @@ class _CommentFilmState extends State<CommentFilm> {
 
   @override
   Widget build(BuildContext context) {
-    String userID = "cf282ca3-4017-4778-9999-454faaf3cc15";
+    String userID = "";
     final _comentario = TextEditingController(text: "");
     print(ModalRoute.of(context).settings.arguments);
 
@@ -145,7 +145,7 @@ class _CommentFilmState extends State<CommentFilm> {
         child: Row(
           children: [
             Text(
-              "Jsam@gmail.com",
+              "Comenta...",
               style: TextStyle(),
             ),
           ],

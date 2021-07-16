@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter_demo/src/Model/Film.dart';
+import 'package:flutter_demo/src/services/user_service.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import '../../main.dart';
 
 class searchTitle_service {
-  String token = TextApp.TOKEN_TEMPORAL;
+  String token;
 /**
    * Método que obtiene por medio de una petición get los datos de las películas y 
    * series alojados en el API de la plataforma TMDB ya que estos van a ser mostrados 
@@ -17,6 +17,7 @@ class searchTitle_service {
   String url = 'https://10.0.2.2:5001/api/Movies/popular';
   Future<List<Film>> getFilms() async {
     HttpOverrides.global = new MyHttpOverrides();
+    this.token =  await getStoredToken();
     final response = await http
         .get(Uri.parse(url), headers: {'Authorization': 'Bearer $token'});
 
@@ -35,6 +36,7 @@ class searchTitle_service {
   Future<List<Film>> getFilmsByName(String title) async {
     String url = 'https://10.0.2.2:5001/api/Movies/search?query=' + title;
     HttpOverrides.global = new MyHttpOverrides();
+    this.token = await getStoredToken();
     final response = await http
         .get(Uri.parse(url), headers: {'Authorization': 'Bearer $token'});
     List<Film> films = [];
@@ -52,7 +54,7 @@ class searchTitle_service {
   void addFilm(jsonData, List<Film> films, String path_img) {
     for (var item in jsonData["results"]) {
       films.add(Film(item["id"], item["original_title"],
-          '$path_img' '${item["poster_path"]}', item["overview"]));
+          '$path_img''${item["poster_path"]}', item["overview"]));
     }
   }
 }
