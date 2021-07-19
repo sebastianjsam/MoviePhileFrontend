@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
+import 'package:flutter_demo/src/pages/PostInCommunity.dart';
 import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/pages/Principal.dart';
 import 'package:flutter_demo/src/pages/Registro_page.dart';
@@ -22,5 +23,7 @@ Map<String, WidgetBuilder> getRoutes() {
     'Consultar Titulo': (BuildContext context) => SearchPage(),
 
     'ConsultComunity': (BuildContext context) => ConsultComunityPage(),
+
+    'PostInCommunity': (BuildContext context) => PostInCommunity(),
   };
 }
