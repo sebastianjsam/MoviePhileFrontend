@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Film.dart';
+import 'package:flutter_demo/src/Model/User_Login.dart';
+import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
+import 'package:flutter_demo/src/pages/FilmComment.dart';
+import 'package:flutter_demo/src/pages/Registrar_Comunidad.dart';
+import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/services/SearchTitle_service.dart';
+
+import 'menulateral.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -36,7 +43,9 @@ class _SearchPageState extends State<SearchPage> {
             centerTitle: true,
             leading: IconButton(
               icon: Icon(Icons.menu),
-              onPressed: () {},
+              onPressed: () {
+                MenuLateral();
+              },
             ),
             actions: <Widget>[
               IconButton(
@@ -50,6 +59,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ],
           ),
+          drawer: MenuLateral(),
           body: FutureBuilder<List<Film>>(
             future: _filmsList,
             builder: (context, snapshot) {
@@ -97,7 +107,11 @@ class _SearchPageState extends State<SearchPage> {
                   child: Text("Detalle"),
                   splashColor: Colors.blue,
                   color: Colors.blueAccent,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'CommentFilm',
+                        arguments: film.idFilm);
+                    //print(film.idFilm);
+                  },
                 ),
               )
             ],

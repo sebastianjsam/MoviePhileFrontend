@@ -9,8 +9,17 @@ class TextApp {
   // ignore: non_constant_identifier_names
   static String COMMENT_MADE = "Comentario hecho";
   // ignore: non_constant_identifier_names
+  static String COMMENT_FAIL = "Comentario no Realizado";
+  // ignore: non_constant_identifier_names
+  static String PUBLISH_DONE = "Publicación Realizada";
+  // ignore: non_constant_identifier_names
+  static String PUBLISH_FAIL = "Publicacíon Fallida";
+  // ignore: non_constant_identifier_names
   static String COMMENT_TEXT = "Comentar";
   // ignore: non_constant_identifier_names
+  static String PUBLISH_TEXT = "Publicar";
+
+  // ignore: non_constant_identifier_names
   static String TOKEN_TEMPORAL =
-      "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImNmMjgyY2EzLTQwMTctNDc3OC05OTk5LTQ1NGZhYWYzY2MxNSIsInN1YiI6ImpzYW1AZ21haWwuY29tIiwiZW1haWwiOiJqc2FtQGdtYWlsLmNvbSIsImp0aSI6ImYzMGRkY2M3LWMxZmYtNGU2Ny04ZTY1LTlmNTk5YWYwMGYwNiIsIm5iZiI6MTYyNTg4MDIyNCwiZXhwIjoxNjI1OTAxODI0LCJpYXQiOjE2MjU4ODAyMjR9.zghlhIJWem7G3Exi5D1r8lD2McTTQ5uq9X8VSxaZ2_5gig2qv1BA5UKjiBPvchcu6n0ADE-X1ysK14trdl9wng";
+      "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImNmMjgyY2EzLTQwMTctNDc3OC05OTk5LTQ1NGZhYWYzY2MxNSIsInN1YiI6ImpzYW1AZ21haWwuY29tIiwiZW1haWwiOiJqc2FtQGdtYWlsLmNvbSIsImp0aSI6IjA5OTFmODY2LTQ0YzgtNDYyZi05Zjc0LTYwNDIzNjhkMWQwMiIsIm5iZiI6MTYyNjY2MDU1NSwiZXhwIjoxNjI2NjgyMTU1LCJpYXQiOjE2MjY2NjA1NTV9.b8d4uzdtUcWibxFx8CToe3iyBJulLHSeUY4mnYaKcsHLZFc6xF5xvEQSUktQw1VNniH711HR1xo9c695waXqvA";
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_demo/src/Model/Login_Usuario.dart';
+import 'package:flutter_demo/src/Model/User_Login.dart';
 
 import 'package:flutter_demo/src/services/user_service.dart';
 
@@ -19,6 +18,7 @@ class _LoginPageState extends State<UserLogin_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //  backgroundColor: Colors.blue, // color pantalla
       appBar: AppBar(
         centerTitle: true,
         title: Column(children: [
@@ -36,9 +36,9 @@ class _LoginPageState extends State<UserLogin_page> {
             child: Column(
               children: <Widget>[
                 Text(
-                  'Sing In',
+                  'Login',
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Colors.black,
                     fontFamily: 'OpenSans',
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
@@ -56,7 +56,7 @@ class _LoginPageState extends State<UserLogin_page> {
           Divider(),
           _buildBtnLogin(),
           Divider(),
-          _buildSignupBtn(),
+          _buildSignupBtn()
         ],
       ),
     );
@@ -117,7 +117,7 @@ class _LoginPageState extends State<UserLogin_page> {
               email: emailCotroler.text, password: passwordControler.text);
           getToken(userLogin).then((value) => {
                 if (value != null)
-                  {Navigator.pushNamed(context, '/')}
+                  {Navigator.pushNamed(context, 'Consultar Titulo')}
                 else
                   {_buildAlert(context)}
               });

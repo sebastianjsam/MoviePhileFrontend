@@ -1,25 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/providers/menu.dart';
 import 'package:flutter_demo/src/utils/icono_string_util.dart';
+import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 
 class Principal extends StatelessWidget {
+  UserLogin_page page = new UserLogin_page();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Column(children: [
-          Text("MoviePhile"),
-          GestureDetector(
-            child: Text('Debate, Comparte, conoce y acercate al cine',
-                style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
-          )
-        ]),
+    return page;
+  }
+
+  /* Widget _buildBtnLogin(BuildContext context) {
+    return MaterialButton(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      // width: double.minPositive,
+      child: RaisedButton(
+        child: Text('Login'),
+        color: Colors.grey,
+        textColor: Colors.black,
+        shape: StadiumBorder(),
+        onPressed: () {
+          Navigator.pushNamed(context, 'User Login');
+        },
+        padding: EdgeInsets.all(15.0),
       ),
-      body: _lista(),
     );
   }
 
+  Widget _buildSignupBtn(BuildContext context) {
+    return MaterialButton(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      // width: double.minPositive,
+      child: RaisedButton(
+        child: Text('Sing Up'),
+        color: Colors.grey,
+        textColor: Colors.black,
+        shape: StadiumBorder(),
+        onPressed: () {
+          Navigator.pushNamed(context, 'Registro Usuario');
+        },
+        padding: EdgeInsets.all(15.0),
+      ),
+    );
+  }
+*/
   Widget _lista() {
     return FutureBuilder(
       future: menuProvider.cargarDatos(),
