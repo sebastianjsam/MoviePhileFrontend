@@ -30,7 +30,7 @@ class FilmS {
         id: json['id'],
         title: json['title'],
         overView: json['overview'],
-        homePage: json['homePage'],
+        homePage: 'https://image.tmdb.org/t/p/w500',
         posterPath: json['posterPath'],
         genre: Genre.fromJson(new Map<String, dynamic>.from(json['genre'])),
         comments: commentsList);

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/src/Model/User.dart';
+import 'package:flutter_demo/src/services/user_service.dart';
 
 class RegistroPage extends StatefulWidget {
   @override
@@ -6,10 +8,11 @@ class RegistroPage extends StatefulWidget {
 }
 
 class _RegistroPageState extends State<RegistroPage> {
-  String _nombre;
-  String _apellido;
-  String _email = '';
-  String _password = '';
+  User user;
+  final _id = TextEditingController();
+  final _name = TextEditingController();
+  final _email = TextEditingController();
+  final _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +24,10 @@ class _RegistroPageState extends State<RegistroPage> {
         children: <Widget>[
           _crearNombre(),
           Divider(),
-          _crearApellido(),
-          Divider(),
-          _crearEdad(),
-          Divider(),
+          // _crearApellido(),
+          // Divider(),
+          // _crearEdad(),
+          // Divider(),
           _crearEmail(),
           Divider(),
           _crearContrasena(),
@@ -36,7 +39,24 @@ class _RegistroPageState extends State<RegistroPage> {
             textColor: Colors.white,
             shape: StadiumBorder(),
             onPressed: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
+              if(_name.text.isEmpty || _email.text.isEmpty || _password.text.isEmpty) {
+                _buildAlert(context);
+              } else {
+                user = User(
+                  userName: _name.text,
+                  email: _email.text,
+                  password: _password.text
+                );
+
+                register(user).then((value) => {
+                  if (value != null) {
+                    Navigator.pushNamed(context, 'Consultar Titulo')
+                  } else {
+                    // _buildAlert(context)
+                  }
+                });
+              }
             },
           ),
         ],
@@ -49,82 +69,74 @@ class _RegistroPageState extends State<RegistroPage> {
   Widget _crearNombre() {
     return TextField(
       //autofocus: true,
+      controller: _name,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-          counter: Text('letras 100'),
-          hintText: 'Nombre usuario',
-          labelText: 'Nombre',
-          helperText: 'Solo nombre',
-          suffixIcon: Icon(Icons.accessibility),
-          icon: Icon(Icons.account_circle)),
-      onChanged: (valor) {
-        setState(() {
-          _nombre = valor;
-        });
-      },
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        counter: Text('letras 100'),
+        hintText: 'Nombre de usuario',
+        labelText: 'Nombre de usuario',
+        suffixIcon: Icon(Icons.accessibility),
+        icon: Icon(Icons.account_circle)
+      )
     );
   }
 
 // Metodo que estructura el campo del nombre de apellido
 // return el campo de ingresar en apellido
-  Widget _crearApellido() {
-    return TextField(
-      //autofocus: true,
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-          counter: Text('letras 100'),
-          hintText: 'Apellido usuario',
-          labelText: 'Apellido',
-          helperText: 'Solo apellido',
-          suffixIcon: Icon(Icons.accessibility),
-          icon: Icon(Icons.account_circle)),
-      onChanged: (valor) {
-        setState(() {
-          _apellido = valor;
-        });
-      },
-    );
-  }
+  // Widget _crearApellido() {
+  //   return TextField(
+  //     //autofocus: true,
+  //     textCapitalization: TextCapitalization.sentences,
+  //     decoration: InputDecoration(
+  //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+  //         counter: Text('letras 100'),
+  //         hintText: 'Apellido usuario',
+  //         labelText: 'Apellido',
+  //         helperText: 'Solo apellido',
+  //         suffixIcon: Icon(Icons.accessibility),
+  //         icon: Icon(Icons.account_circle)),
+  //     onChanged: (valor) {
+  //       setState(() {
+  //         _apellido = valor;
+  //       });
+  //     },
+  //   );
+  // }
 
-  Widget _crearEdad() {
-    return TextField(
-      //autofocus: true,
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-          counter: Text('letras 100'),
-          hintText: 'Registrar Edad',
-          labelText: 'Edad',
-          helperText: 'Solo edad',
-          suffixIcon: Icon(Icons.accessibility),
-          icon: Icon(Icons.account_circle)),
-      onChanged: (valor) {
-        setState(() {
-          _apellido = valor;
-        });
-      },
-    );
-  }
+  // Widget _crearEdad() {
+  //   return TextField(
+  //     //autofocus: true,
+  //     textCapitalization: TextCapitalization.sentences,
+  //     decoration: InputDecoration(
+  //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+  //         counter: Text('letras 100'),
+  //         hintText: 'Registrar Edad',
+  //         labelText: 'Edad',
+  //         helperText: 'Solo edad',
+  //         suffixIcon: Icon(Icons.accessibility),
+  //         icon: Icon(Icons.account_circle)),
+  //     onChanged: (valor) {
+  //       setState(() {
+  //         _apellido = valor;
+  //       });
+  //     },
+  //   );
+  // }
 
   // Metodo que estructura el campo email
 // return el campo de ingresar email
   Widget _crearEmail() {
     return TextField(
       //autofocus: true,
+      controller: _email,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-          hintText: 'Email',
-          labelText: 'Email',
+          hintText: 'Correo electrónico',
+          labelText: 'Correo electrónico',
           suffixIcon: Icon(Icons.alternate_email),
-          icon: Icon(Icons.email)),
-      onChanged: (valor) {
-        setState(() {
-          _email = valor;
-        });
-      },
+          icon: Icon(Icons.email))
     );
   }
 
@@ -133,22 +145,41 @@ class _RegistroPageState extends State<RegistroPage> {
   Widget _crearContrasena() {
     return TextField(
       //autofocus: true,
+      controller: _password,
       obscureText: true,
       decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-          hintText: 'Password',
-          labelText: 'Password',
+          hintText: 'Contraseña',
+          labelText: 'Contraseña',
           suffixIcon: Icon(Icons.lock_open),
-          icon: Icon(Icons.lock)),
-      onChanged: (valor) {
-        setState(() {
-          _password = valor;
-        });
-      },
+          icon: Icon(Icons.lock))
     );
   }
 
-// Metodo que estructura el campo texto que nuestra los campo que se estan escribiendo
-// return el campo un texto
-
+  void _buildAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          title: Text('Error'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Datos faltantes'),
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                })
+          ],
+        );
+      },
+    );
+  }
 }
