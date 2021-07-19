@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Comunity.dart';
 import 'package:flutter_demo/src/services/ConsultComunityService.dart';
 
+import 'menulateral.dart';
+
 class ConsultComunityPage extends StatefulWidget {
   @override
   _ConsultComunityPageState createState() => _ConsultComunityPageState();
@@ -53,6 +55,7 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
               ),
             ],
           ),
+          drawer: MenuLateral(),
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -70,9 +73,12 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.bold),
                           )),
-                          Container(
-                            //height: MediaQuery.of(context).size.height,
-                            child: _listComunity(snapshot),
+                          SingleChildScrollView(
+                            physics: ScrollPhysics(),
+                            child: Container(
+                              //height: MediaQuery.of(context).size.height,
+                              child: _listComunity(snapshot),
+                            ),
                           ),
                         ],
                       );
@@ -107,6 +113,7 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
             Axis.vertical, //obligatorio declarar width para evitar error
         //reverse: true,
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(

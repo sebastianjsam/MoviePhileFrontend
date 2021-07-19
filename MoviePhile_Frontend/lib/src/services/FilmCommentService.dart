@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_demo/src/Model/FilmS.dart';
+import 'package:flutter_demo/src/services/user_service.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,9 +8,12 @@ class FilmcommentService {
   static Future<String> filmCommentSend(
       String comentario, String userID, int filmId, int commentType) async {
     String url = TextApp.IP_BACKEND + TextApp.PORT_BACKEND;
-    url += "/api/FilmCommentControllerBase/CommentFilm";
+    url += "/api/FilmComment";
     print("url: " + url);
     var response;
+    var token = await getStoredToken();
+    var userID = parseJwt(token)['Id'];
+    
     try {
       response = await http.post(
         Uri.parse(url),
@@ -40,13 +44,13 @@ class FilmcommentService {
     var response;
     String url = TextApp.IP_BACKEND + TextApp.PORT_BACKEND;
     url += "/api/Movies?movieId=" + filmId.toString();
-
+    token = await getStoredToken();
     try {
       response = await http.get(
         Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': 'Bearer ' + TextApp.TOKEN_TEMPORAL
+          'Authorization': 'Bearer ' + token
         },
       );
     } catch (e) {

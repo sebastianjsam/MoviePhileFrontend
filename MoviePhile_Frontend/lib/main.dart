@@ -22,7 +22,6 @@ void main() {
   runApp(MyApp());
 }
 
-
 //main principal
 class MyApp extends StatelessWidget {
   @override
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         // home: HomePage()
         initialRoute: '/',
-        routes: getObtenerRutas(),
+        routes: getRoutes(),
         onGenerateRoute: (RouteSettings settings) {
           return MaterialPageRoute(
               builder: (BuildContext context) => Principal());

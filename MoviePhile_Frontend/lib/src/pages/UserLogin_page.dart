@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/src/Model/Login_Usuario.dart';
+import 'package:flutter_demo/src/Model/User_Login.dart';
+
 import 'package:flutter_demo/src/services/user_service.dart';
 
-class LoginUsuarioPage extends StatefulWidget {
+class UserLogin_page extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 // Estructura de la pagina login
 // Con sus respectivos campos de email y password
-class _LoginPageState extends State<LoginUsuarioPage> {
+class _LoginPageState extends State<UserLogin_page> {
   UserLogin userLogin;
   final emailCotroler = TextEditingController();
   final passwordControler = TextEditingController();
@@ -17,6 +18,7 @@ class _LoginPageState extends State<LoginUsuarioPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //  backgroundColor: Colors.blue, // color pantalla
       appBar: AppBar(
         centerTitle: true,
         title: Column(children: [
@@ -34,9 +36,9 @@ class _LoginPageState extends State<LoginUsuarioPage> {
             child: Column(
               children: <Widget>[
                 Text(
-                  'Sing In',
+                  'Login',
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Colors.black,
                     fontFamily: 'OpenSans',
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
@@ -48,11 +50,13 @@ class _LoginPageState extends State<LoginUsuarioPage> {
               ],
             ),
           ),
-          _crearEmail(),
+          _buildEmail(),
           Divider(),
-          _crearContrasena(),
+          _buildPassword(),
           Divider(),
-          _crearBtnLogin(),
+          _buildBtnLogin(),
+          Divider(),
+          _buildSignupBtn()
         ],
       ),
     );
@@ -60,7 +64,7 @@ class _LoginPageState extends State<LoginUsuarioPage> {
 
 // Metodo que estructura el campo email
 // return el campo de ingresar email
-  Widget _crearEmail() {
+  Widget _buildEmail() {
     return TextField(
       //autofocus: true,
       controller: emailCotroler,
@@ -80,7 +84,7 @@ class _LoginPageState extends State<LoginUsuarioPage> {
 
 // Metodo que estructura el campo password
 // return el campo de ingresar password
-  Widget _crearContrasena() {
+  Widget _buildPassword() {
     return TextField(
         //autofocus: true,
         controller: passwordControler,
@@ -99,13 +103,13 @@ class _LoginPageState extends State<LoginUsuarioPage> {
   }
 
 // Crear  boton de login
-  Widget _crearBtnLogin() {
-    return Container(
+  Widget _buildBtnLogin() {
+    return MaterialButton(
       padding: EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
+      // width: double.infinity,
       child: RaisedButton(
         child: Text('Login'),
-        color: Colors.blue,
+        color: Colors.lightBlue,
         textColor: Colors.black,
         shape: StadiumBorder(),
         onPressed: () {
@@ -113,9 +117,9 @@ class _LoginPageState extends State<LoginUsuarioPage> {
               email: emailCotroler.text, password: passwordControler.text);
           getToken(userLogin).then((value) => {
                 if (value != null)
-                  {Navigator.pushNamed(context, '/')}
+                  {Navigator.pushNamed(context, 'Consultar Titulo')}
                 else
-                  {_mostrarAlerta(context)}
+                  {_buildAlert(context)}
               });
         },
         padding: EdgeInsets.all(15.0),
@@ -126,7 +130,7 @@ class _LoginPageState extends State<LoginUsuarioPage> {
 // Metodo que estructura al momento de dar un click con una alerta
 // return un alerta
 //
-  void _mostrarAlerta(BuildContext context) {
+  void _buildAlert(BuildContext context) {
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -152,6 +156,23 @@ class _LoginPageState extends State<LoginUsuarioPage> {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildSignupBtn() {
+    return MaterialButton(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      // width: double.minPositive,
+      child: RaisedButton(
+        child: Text('Sing Up'),
+        color: Colors.lightBlue,
+        textColor: Colors.black,
+        shape: StadiumBorder(),
+        onPressed: () {
+          Navigator.pushNamed(context, 'Registro Usuario');
+        },
+        padding: EdgeInsets.all(15.0),
+      ),
     );
   }
 }
