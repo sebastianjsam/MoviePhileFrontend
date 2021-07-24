@@ -3,6 +3,7 @@ import 'package:flutter_demo/src/Model/Film.dart';
 import 'package:flutter_demo/src/Model/User_Login.dart';
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
+import 'package:flutter_demo/src/pages/PostInCommunity.dart';
 import 'package:flutter_demo/src/pages/Registrar_Comunidad.dart';
 import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/services/SearchTitle_service.dart';
@@ -53,6 +54,17 @@ class MenuLateral extends StatelessWidget {
                 context,
                 new MaterialPageRoute(
                   builder: (context) => new ConsultComunityPage(),
+                ),
+              );
+            },
+          ),
+          new ListTile(
+            title: Text("Crear una Publicacion en Comunidad"),
+            onTap: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => new PostInCommunity(),
                 ),
               );
             },
