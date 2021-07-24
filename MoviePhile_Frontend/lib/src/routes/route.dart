@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
+import 'package:flutter_demo/src/pages/InfCommunity.dart';
 import 'package:flutter_demo/src/pages/PostInCommunity.dart';
 import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/pages/Principal.dart';
@@ -25,5 +26,7 @@ Map<String, WidgetBuilder> getRoutes() {
     'ConsultComunity': (BuildContext context) => ConsultComunityPage(),
 
     'PostInCommunity': (BuildContext context) => PostInCommunity(),
+
+    'InfCommunity': (BuildContext context) => InfCommunitys(),
   };
 }
