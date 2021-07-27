@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/src/pages/AgregarUsuarioAComunidad.dart';
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
 import 'package:flutter_demo/src/pages/InfCommunity.dart';
@@ -27,6 +28,9 @@ Map<String, WidgetBuilder> getRoutes() {
 
     'PostInCommunity': (BuildContext context) => PostInCommunity(),
 
+
     'InfCommunity': (BuildContext context) => InfCommunitys(),
+
+    'addUserToCommunity': (BuildContext context) => AddUsertToComunity(),
   };
 }
