@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Comunity.dart';
+import 'package:flutter_demo/src/pages/InfCommunity.dart';
 import 'package:flutter_demo/src/services/ConsultComunityService.dart';
 
 import 'menulateral.dart';
@@ -156,7 +157,12 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
                       child: Text("Ir"),
                       splashColor: Colors.blue,
                       color: Colors.blueAccent,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => new InfCommunitys()));
+                      },
                     ),
                   )
                 ],
