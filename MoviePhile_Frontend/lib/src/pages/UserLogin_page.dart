@@ -107,6 +107,7 @@ class _LoginPageState extends State<UserLogin_page> {
     return MaterialButton(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       // width: double.infinity,
+      onPressed: () {},
       child: RaisedButton(
         child: Text('Login'),
         color: Colors.lightBlue,
@@ -163,6 +164,7 @@ class _LoginPageState extends State<UserLogin_page> {
     return MaterialButton(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       // width: double.minPositive,
+      onPressed: () {},
       child: RaisedButton(
         child: Text('Sing Up'),
         color: Colors.lightBlue,

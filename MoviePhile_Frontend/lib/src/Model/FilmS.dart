@@ -11,6 +11,7 @@ class FilmS {
   String posterPath;
   Genre genre;
   List<Comments> comments;
+  double voteAverage;
 
   FilmS(
       {this.id,
@@ -19,7 +20,8 @@ class FilmS {
       this.homePage,
       this.posterPath,
       this.genre,
-      this.comments});
+      this.comments,
+      this.voteAverage});
 
   factory FilmS.fromJson(Map<String, dynamic> json) {
     print("Comments: " + json['comments'].toString());
@@ -33,7 +35,8 @@ class FilmS {
         homePage: 'https://image.tmdb.org/t/p/w500',
         posterPath: json['posterPath'],
         genre: Genre.fromJson(new Map<String, dynamic>.from(json['genre'])),
-        comments: commentsList);
+        comments: commentsList,
+        voteAverage: json['voteAverage']);
   }
 
   List<Comments> addcomment(Map<String, dynamic> json) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/src/Model/FilmS.dart';
 import 'package:flutter_demo/src/services/FilmCommentService.dart';
 import 'package:flutter_demo/src/services/RecordfilmratingService.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
@@ -8,83 +7,37 @@ import 'package:overlay_support/overlay_support.dart';
 
 import 'menulateral.dart';
 
-class CommentFilm extends StatefulWidget {
+class RecordFilmRating extends StatefulWidget {
   @override
-  _CommentFilmState createState() => _CommentFilmState();
+  _RecordFilmRatingState createState() => _RecordFilmRatingState();
 }
 
 enum options { COMMENT, THEORIES, EASTEREGGS }
 int fiml = 0;
 
-class _CommentFilmState extends State<CommentFilm> {
-  Future<FilmS> _filcomentList;
-
+class _RecordFilmRatingState extends State<RecordFilmRating> {
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      fiml = ModalRoute.of(context).settings.arguments;
-      _filcomentList = FilmcommentService.allCommentGetFilm(fiml);
-      setState(() {});
-    });
   }
 
   @override
-  void didInitState() {}
-
-  @override
   Widget build(BuildContext context) {
-    String userID = "";
     final _comentario = TextEditingController(text: "");
     print(ModalRoute.of(context).settings.arguments);
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text("MoviePhile")),
-        // drawer: MenuLateral(),
-        body: Container(
-          color: Colors.grey,
-          child: SingleChildScrollView(
-            child: FutureBuilder<FilmS>(
-                future: _filcomentList,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Column(
-                      children: [
-                        _titleFilm(snapshot.data.title),
-                        _imgFilm(snapshot),
-                        _descriptionFilm(snapshot.data.overView.toString()),
-                        Container(
-                          height: snapshot.data.comments.length == 0 ? 0 : 200,
-                          child: SafeArea(child: _commentScreen(snapshot)),
-                        ),
-                        _dividerLine(),
-                        Text(snapshot.data.voteAverage.toString(),
-                            style: TextStyle(color: Colors.red)),
-                        _rating(fiml),
-                        _boxComment(userID, _comentario),
-                        _buttonCommentar(_comentario, userID)
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text("error en la conexión");
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 50.0),
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }),
-          ),
-        ),
-      ),
+          appBar: AppBar(title: Text("MoviePhile")),
+          drawer: MenuLateral(),
+          body: _Rating(
+            508943,
+          )),
     );
   }
 
-  Row _rating(int filmId) {
-    return Row(
+  Column _Rating(int filmId) {
+    return Column(
       children: [
         Text(
           "Calificar: ",
@@ -205,7 +158,7 @@ class _CommentFilmState extends State<CommentFilm> {
     if (registro.contains("true")) {
       toast(TextApp.COMMENT_MADE);
       //falta agregar el comentario sin tener que consultar a la base de datos.
-      _filcomentList = FilmcommentService.allCommentGetFilm(fiml);
+      //  _filcomentList = FilmcommentService.allCommentGetFilm(fiml);
       //fin
       setState(() {});
     }
