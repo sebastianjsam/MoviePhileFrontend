@@ -12,6 +12,8 @@ class FilmS {
   Genre genre;
   List<Comments> comments;
   double voteAverage;
+  double popularity;
+  double score;
 
   FilmS(
       {this.id,
@@ -21,7 +23,9 @@ class FilmS {
       this.posterPath,
       this.genre,
       this.comments,
-      this.voteAverage});
+      this.voteAverage,
+      this.popularity,
+      this.score});
 
   factory FilmS.fromJson(Map<String, dynamic> json) {
     print("Comments: " + json['comments'].toString());
@@ -36,7 +40,9 @@ class FilmS {
         posterPath: json['posterPath'],
         genre: Genre.fromJson(new Map<String, dynamic>.from(json['genre'])),
         comments: commentsList,
-        voteAverage: json['voteAverage']);
+        voteAverage: json['voteAverage'],
+        popularity: json['popularity'],
+        score: json['score']);
   }
 
   List<Comments> addcomment(Map<String, dynamic> json) {
