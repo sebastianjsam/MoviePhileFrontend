@@ -12,8 +12,8 @@ class UserLogin_page extends StatefulWidget {
 // Con sus respectivos campos de email y password
 class _LoginPageState extends State<UserLogin_page> {
   UserLogin userLogin;
-  final emailCotroler = TextEditingController(text: "jsam@gmail.com");
-  final passwordControler = TextEditingController(text: "Aa12345_");
+  final emailCotroler = TextEditingController();
+  final passwordControler = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
