@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
+
 import 'package:flutter_demo/src/pages/AgregarUsuarioAComunidad.dart';
-=======
->>>>>>> parent of 63153d8 (registrar titulo promocinado)
+
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
 import 'package:flutter_demo/src/pages/InfCommunity.dart';
 import 'package:flutter_demo/src/pages/PostInCommunity.dart';
-<<<<<<< HEAD
+
 import 'package:flutter_demo/src/pages/RecordFilmRating.dart';
-=======
->>>>>>> parent of 63153d8 (registrar titulo promocinado)
+
 import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/pages/Principal.dart';
 import 'package:flutter_demo/src/pages/Registro_page.dart';
@@ -36,12 +34,9 @@ Map<String, WidgetBuilder> getRoutes() {
     'PostInCommunity': (BuildContext context) => PostInCommunity(),
 
     'InfCommunity': (BuildContext context) => InfCommunitys(),
-<<<<<<< HEAD
 
     'addUserToCommunity': (BuildContext context) => AddUsertToComunity(),
 
     'RecordFilmRating': (BuildContext context) => RecordFilmRating(),
-=======
->>>>>>> parent of 63153d8 (registrar titulo promocinado)
   };
 }
