@@ -4,7 +4,10 @@ import 'package:flutter_demo/src/Model/User_Login.dart';
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
 import 'package:flutter_demo/src/pages/PostInCommunity.dart';
+<<<<<<< HEAD
 import 'package:flutter_demo/src/pages/RecordFilmRating.dart';
+=======
+>>>>>>> parent of 63153d8 (registrar titulo promocinado)
 import 'package:flutter_demo/src/pages/Registrar_Comunidad.dart';
 import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/services/SearchTitle_service.dart';
@@ -72,6 +75,7 @@ class MenuLateral extends StatelessWidget {
             },
           ),
           new ListTile(
+<<<<<<< HEAD
             title: Text("Agregar usuario a comunidad"),
             onTap: () {
               Navigator.push(
@@ -94,6 +98,8 @@ class MenuLateral extends StatelessWidget {
             },
           ),
           new ListTile(
+=======
+>>>>>>> parent of 63153d8 (registrar titulo promocinado)
             title: Text("Salir"),
             onTap: () {
               Navigator.push(
