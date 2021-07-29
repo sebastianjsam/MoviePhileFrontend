@@ -12,8 +12,8 @@ class UserLogin_page extends StatefulWidget {
 // Con sus respectivos campos de email y password
 class _LoginPageState extends State<UserLogin_page> {
   UserLogin userLogin;
-  final emailCotroler = TextEditingController(text: "jsam@gmail.com");
-  final passwordControler = TextEditingController(text: "Aa12345_");
+  final emailCotroler = TextEditingController();
+  final passwordControler = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,6 @@ class _LoginPageState extends State<UserLogin_page> {
     return MaterialButton(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       // width: double.infinity,
-      onPressed: () {},
       child: RaisedButton(
         child: Text('Login'),
         color: Colors.lightBlue,
@@ -164,7 +163,6 @@ class _LoginPageState extends State<UserLogin_page> {
     return MaterialButton(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       // width: double.minPositive,
-      onPressed: () {},
       child: RaisedButton(
         child: Text('Sing Up'),
         color: Colors.lightBlue,

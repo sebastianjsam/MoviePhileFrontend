@@ -13,7 +13,7 @@ class FilmcommentService {
     var response;
     var token = await getStoredToken();
     var userID = parseJwt(token)['Id'];
-
+    
     try {
       response = await http.post(
         Uri.parse(url),
@@ -56,8 +56,7 @@ class FilmcommentService {
     } catch (e) {
       throw ("allCommentGetFilm: Error Get, quizas Backend no disponible");
     }
-    print("________________");
-    print(response.body);
+
     var jsonResponse = json.decode(response.body);
     var objectResponse = FilmS.fromJson(jsonResponse);
     if (response.statusCode == 200) {

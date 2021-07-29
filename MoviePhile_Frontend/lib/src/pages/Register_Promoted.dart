@@ -29,13 +29,14 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
     genre.getAllGenre().then((value) => {
           _dropdownMenuItems = buildDropdownMenuItems(value),
           _selectedgenero = _dropdownMenuItems[0].value,
-          super.initState()
         });
+    super.initState();
   }
 
   List<DropdownMenuItem<Genre>> buildDropdownMenuItems(List genero) {
     List<DropdownMenuItem<Genre>> items = List();
     for (Genre genre in genero) {
+      print(genre.name);
       items.add(
         DropdownMenuItem(
           value: genre,
@@ -43,6 +44,7 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
         ),
       );
     }
+
     return items;
   }
 
@@ -56,16 +58,24 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('Titulo Promocionado'),
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
+          Text(
+            "Pelicula promocionada",
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 50.0,
+          ),
           _crearTitulo(),
           Divider(),
           _crearDescripcion(),
           Divider(),
-          Text("Generos"),
+          Text("Seleccione el Generos"),
           DropdownButton(
             value: _selectedgenero,
             items: _dropdownMenuItems,
@@ -86,7 +96,7 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
               } else {
                 //print("entro aqui.....");
                 register = RegisterPromoted(
-                    idFilm: 99999 + 5,
+                    idFilm: 99999 + 6,
                     titleFilm: _title.text,
                     descriptionFilm: _description.text,
                     idGenre: _selectedgenero.id);

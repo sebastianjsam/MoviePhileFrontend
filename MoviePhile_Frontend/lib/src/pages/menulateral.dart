@@ -4,14 +4,12 @@ import 'package:flutter_demo/src/Model/User_Login.dart';
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
 import 'package:flutter_demo/src/pages/PostInCommunity.dart';
-import 'package:flutter_demo/src/pages/RecordFilmRating.dart';
+import 'package:flutter_demo/src/pages/Register_Promoted.dart';
 import 'package:flutter_demo/src/pages/Registrar_Comunidad.dart';
 import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/services/SearchTitle_service.dart';
 
-import 'AgregarUsuarioAComunidad.dart';
 import 'ConsultarTitulo_page.dart';
-import 'Register_Promoted.dart';
 
 class MenuLateral extends StatelessWidget {
   @override
@@ -68,28 +66,6 @@ class MenuLateral extends StatelessWidget {
                 context,
                 new MaterialPageRoute(
                   builder: (context) => new PostInCommunity(),
-                ),
-              );
-            },
-          ),
-          new ListTile(
-            title: Text("Agregar usuario a comunidad"),
-            onTap: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(
-                  builder: (context) => new AddUsertToComunity(),
-                ),
-              );
-            },
-          ),
-          new ListTile(
-            title: Text("Calificar Film"),
-            onTap: () {
-              Navigator.push(
-                context,
-                new MaterialPageRoute(
-                  builder: (context) => new RecordFilmRating(),
                 ),
               );
             },
