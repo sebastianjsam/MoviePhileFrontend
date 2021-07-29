@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/src/pages/AgregarUsuarioAComunidad.dart';
+import 'package:flutter_demo/src/Model/Register_Promoted.dart';
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
 import 'package:flutter_demo/src/pages/InfCommunity.dart';
 import 'package:flutter_demo/src/pages/PostInCommunity.dart';
 import 'package:flutter_demo/src/pages/RecordFilmRating.dart';
+import 'package:flutter_demo/src/pages/Register_Promoted.dart';
 import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/pages/Principal.dart';
 import 'package:flutter_demo/src/pages/Registro_page.dart';
@@ -31,8 +32,11 @@ Map<String, WidgetBuilder> getRoutes() {
 
     'InfCommunity': (BuildContext context) => InfCommunitys(),
 
+
     'addUserToCommunity': (BuildContext context) => AddUsertToComunity(),
 
     'RecordFilmRating': (BuildContext context) => RecordFilmRating(),
+
+    'Promoted': (BuildContext context) => PromotedPage(),
   };
 }
