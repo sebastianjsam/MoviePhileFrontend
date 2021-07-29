@@ -20,6 +20,7 @@ class ConsultComunityService {
 
   Future<List<Comunity>> getAllComunity() async {
     // HttpOverrides.global = new MyHttpOverrides();
+
     final response = await http.get(Uri.parse(url),
         headers: {'Authorization': 'Bearer ' + TextApp.TOKEN_TEMPORAL});
     List<Comunity> comunityList = [];

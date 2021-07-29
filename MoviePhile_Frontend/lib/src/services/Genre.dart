@@ -10,26 +10,36 @@ import 'dart:convert';
 import '../../main.dart';
 
 class GenreService {
-  String url = 'https://10.0.2.2:5001​/api​/Genre';
+  // String url = 'https://10.0.2.2:5001​/api​/Genre';
 
   Future<List<Genre>> getAllGenre() async {
     // HttpOverrides.global = new MyHttpOverrides();
-    final response = await http.get(Uri.parse(url),
-        headers: {'Authorization': 'Bearer ' + TextApp.TOKEN_TEMPORAL});
-    print("responde de genero" + response.body);
-    List<Genre> genreList = new List();
+    String url = TextApp.IP_BACKEND + TextApp.PORT_BACKEND;
+    url += '/api/Genre';
+    final response = await http.get(Uri.parse(url), headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + TextApp.TOKEN_TEMPORAL
+    });
+    //print("entro al genero" + response.body);
+    List<Genre> comunityList = [];
     if (response.statusCode == 200) {
+      print("entro___ 1");
+
       String body = utf8.decode(response.bodyBytes);
       final jsonData = jsonDecode(body);
-      for (var data in jsonData) {
-        Genre genre = Genre.fromJson(data);
-        genreList.add(genre);
-      }
-
-      return genreList;
+      print("entro___ 2");
+      addComunity(jsonData, comunityList);
+      return comunityList;
     } else {
       print("Null primer llaamdo");
       return null;
+    }
+  }
+
+  void addComunity(jsonData, List<Genre> comunityList) {
+    for (var item in jsonData) {
+      comunityList.add(Genre.fromJson(item));
+      //  print("entro___ ingresad" + item.toString());
     }
   }
 }
