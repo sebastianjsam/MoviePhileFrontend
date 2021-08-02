@@ -162,6 +162,9 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new InfCommunitys()));
+                        /* Navigator.pushNamed(context, "InfCommunity",
+                            arguments: 1);
+*/
                       },
                     ),
                   )

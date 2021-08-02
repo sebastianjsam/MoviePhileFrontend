@@ -30,11 +30,11 @@ Map<String, WidgetBuilder> getRoutes() {
 
     'PostInCommunity': (BuildContext context) => PostInCommunity(),
 
-    'InfCommunity': (BuildContext context) => InfCommunitys(),
     'Promoted': (BuildContext context) => PromotedPage(),
 
     'addUserToCommunity': (BuildContext context) => AddUsertToComunity(),
 
     'RecordFilmRating': (BuildContext context) => RecordFilmRating(),
+    'InfCommunity': (BuildContext context) => InfCommunitys(),
   };
 }

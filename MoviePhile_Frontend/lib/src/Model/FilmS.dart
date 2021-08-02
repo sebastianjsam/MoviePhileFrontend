@@ -42,7 +42,7 @@ class FilmS {
         comments: commentsList,
         voteAverage: json['voteAverage'],
         popularity: json['popularity'],
-        score: json['score']);
+        score: json['score'] + .0);
     ;
   }
 

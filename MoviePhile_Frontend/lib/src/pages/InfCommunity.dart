@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/FilmS.dart';
 import 'package:flutter_demo/src/Model/InfCommunity.dart';
 import 'package:flutter_demo/src/Model/Publications.dart';
+import 'package:flutter_demo/src/pages/PostInCommunity.dart';
 import 'package:flutter_demo/src/services/FilmCommentService.dart';
 import 'package:flutter_demo/src/services/InfCommunity.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
@@ -15,7 +16,7 @@ class InfCommunitys extends StatefulWidget {
 }
 
 enum options { COMMENT, THEORIES, EASTEREGGS }
-int fiml = 0;
+int fiml = 1;
 
 class _InfCommunityState extends State<InfCommunitys> {
   Future<InfComunity> _InfCommunity;
@@ -52,6 +53,7 @@ class _InfCommunityState extends State<InfCommunitys> {
                         _titleFilm(snapshot.data.name),
                         _descriptionFilm(snapshot.data.description),
                         _buttonJoinCommunity(userID),
+                        _buttonCrearPublicacion(1),
                         Container(
                           alignment: Alignment.topLeft,
                           child: Column(
@@ -61,15 +63,15 @@ class _InfCommunityState extends State<InfCommunitys> {
                                 child: Text(
                                   "Publicaciones",
                                   style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0,
-                                    color: Colors.black54
-                                  ),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                      color: Colors.black54),
                                 ),
                               ),
                               Column(
                                 children: [
-                                  ... _listPublication(snapshot.data.publications),
+                                  ..._listPublication(
+                                      snapshot.data.publications),
                                 ],
                               ),
                             ],
@@ -159,15 +161,14 @@ class _InfCommunityState extends State<InfCommunitys> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    publication.title,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                        color: Colors.blue),
-                  )
-                ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      publication.title,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                          color: Colors.blue),
+                    )),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -186,57 +187,61 @@ class _InfCommunityState extends State<InfCommunitys> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Comentarios: ", textAlign: TextAlign.left,)
-                        ),
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Comentarios: ",
+                              textAlign: TextAlign.left,
+                            )),
                       ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 8.0),    
-                          child: Column(
-                            children: [
-                              for (var c in publication.comments)
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                        0.85,
-                                      child: Card(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Column(
-                                      crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          c.user.email + ': ',
-                                          style: TextStyle(
-                                              color: Colors.blueAccent),
-                                        ),
-                                        Text(
-                                          c.content,
-                                        ),
-                                      ],
-                                    ),
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Column(
+                              children: [
+                                for (var c in publication.comments)
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.85,
+                                        child: Card(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  c.user.email + ': ',
+                                                  style: TextStyle(
+                                                      color: Colors.blueAccent),
+                                                ),
+                                                Text(
+                                                  c.content,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                    ],
+                                  ),
                                 Column(
                                   children: [
                                     _dividerLine(),
-                                    _boxComment(userID, TextEditingController(text: "")),
+                                    _boxComment(userID,
+                                        TextEditingController(text: "")),
                                     _buttonCommentar(_comentario, userID)
                                   ],
                                 )
-                            ],
-                          )
-                        ),
+                              ],
+                            )),
                       ],
                     )
                   ],
@@ -274,31 +279,49 @@ class _InfCommunityState extends State<InfCommunitys> {
     );
   }
 
+  Padding _buttonCrearPublicacion(ComunityID) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 12.0, top: 0, bottom: 10.0),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) => new PostInCommunity()));
+            /* Navigator.pushNamed(context, "InfCommunity",
+                            arguments: 1);
+*/
+          },
+          child: Text("Crear Publicación"),
+        ),
+      ),
+    );
+  }
+
   ListView _commentScreen(comments) {
     return ListView.builder(
-      padding: EdgeInsets.all(10), //espaciado
-      scrollDirection:
-          Axis.vertical, //obligatorio declarar width para evitar error
-      //reverse: true,
-      itemCount: comments?.length ?? 0,
-      itemBuilder: (BuildContext context, int index) {
-        return Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          child: Card(
-            child: ListTile(
-              subtitle: Text(
-                comments
-                    .cast<dynamic>()[index]['user']['email']
-                    .toString(),
-                textAlign: TextAlign.right,
+        padding: EdgeInsets.all(10), //espaciado
+        scrollDirection:
+            Axis.vertical, //obligatorio declarar width para evitar error
+        //reverse: true,
+        itemCount: comments?.length ?? 0,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            width: MediaQuery.of(context).size.width * 0.5,
+            child: Card(
+              child: ListTile(
+                subtitle: Text(
+                  comments.cast<dynamic>()[index]['user']['email'].toString(),
+                  textAlign: TextAlign.right,
+                ),
+                title:
+                    Text(comments.cast<dynamic>()[index]['content'].toString()),
               ),
-              title: Text(comments
-                  .cast<dynamic>()[index]['content']
-                  .toString()),
             ),
-          ),
-        );
-      });
+          );
+        });
   }
 
   ListView _listInfPublication(snapshot) {

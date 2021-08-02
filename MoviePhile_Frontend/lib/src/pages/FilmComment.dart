@@ -61,7 +61,7 @@ class _CommentFilmState extends State<CommentFilm> {
                           ],
                         ),
                         _dividerLine(),
-                        _rating(fiml),
+                        Center(child: _rating(fiml)),
                         _dividerLine(),
                         _descriptionFilm(snapshot.data.overView.toString()),
                         Container(
