@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Genre.dart';
+import 'package:flutter_demo/src/services/AdvertisingService.dart';
 //import 'package:flutter_demo/src/Model/Genre.dart';
 import 'package:flutter_demo/src/services/Genre.dart';
 import 'package:flutter_demo/src/Model/Register_Promoted.dart';
@@ -7,6 +8,10 @@ import 'package:flutter_demo/src/pages/ConsultarTitulo_page.dart';
 import 'package:flutter_demo/src/services/Register_Promoted.dart';
 //import 'package:flutter_demo/src/services/Register_Promoted.dart';
 import 'package:flutter_demo/src/services/user_service.dart';
+import 'package:getwidget/getwidget.dart';
+
+final valorApagar = TextEditingController(text: "100");
+TextEditingController dateCtl = TextEditingController();
 
 class PromotedPage extends StatefulWidget {
   @override
@@ -32,6 +37,13 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
         });
     super.initState();
   }
+
+  List<String> _locations = [
+    'Tarjeta Credito',
+    'Tarjeta débito',
+    'PSE',
+  ]; // Option 2
+  String _selectedLocation; // Option 2
 
   List<DropdownMenuItem<Genre>> buildDropdownMenuItems(List genero) {
     List<DropdownMenuItem<Genre>> items = List();
@@ -61,67 +73,213 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
         centerTitle: true,
         title: Text('Titulo Promocionado'),
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-        children: <Widget>[
-          Text(
-            "Pelicula promocionada",
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 50.0,
-          ),
-          _crearTitulo(),
-          Divider(),
-          _crearDescripcion(),
-          Divider(),
-          Text("Seleccione el Generos"),
-          DropdownButton(
-            value: _selectedgenero,
-            items: _dropdownMenuItems,
-            onChanged: onChangeDropdownItem,
-          ),
-          // _crearGenero(),
-          Divider(),
-          //  _crearPersona(),
-          RaisedButton(
-            child: Text('Registrar'),
-            color: Colors.blue,
-            textColor: Colors.white,
-            shape: StadiumBorder(),
-            onPressed: () {
-              // Navigator.pop(context);
-              if (_title.text.isEmpty || _description.text.isEmpty) {
-                _buildAlert(context);
-              } else {
-                //print("entro aqui.....");
-                register = RegisterPromoted(
-                    idFilm: 99999 + 10,
-                    titleFilm: _title.text,
-                    descriptionFilm: _description.text,
-                    idGenre: _selectedgenero.id);
-                // print("genero"+ idGenre);
-                registerPromoted(register).then((value) => {
-                      if (value != null)
-                        {
-                          //print("entro aqui"),
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                              builder: (context) => new SearchPage(),
-                            ),
-                          )
-                        }
-                      else
-                        {
-                          // _buildAlert(context)
-                        }
-                    });
-              }
-            },
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            GFAccordion(
+              title: "Registrar titulo",
+              collapsedIcon: Icon(Icons.add),
+              expandedIcon: Icon(Icons.minimize),
+              contentChild: ListView(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                children: <Widget>[
+                  Text(
+                    "Pelicula promocionada",
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                  _crearTitulo(),
+                  Divider(),
+                  _crearDescripcion(),
+                  Divider(),
+                  Text("Seleccione el Generos"),
+                  DropdownButton(
+                    value: _selectedgenero,
+                    items: _dropdownMenuItems,
+                    onChanged: onChangeDropdownItem,
+                  ),
+                  // _crearGenero(),
+                  Divider(),
+                  //  _crearPersona(),
+                  RaisedButton(
+                    child: Text('Registrar'),
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    shape: StadiumBorder(),
+                    onPressed: () {
+                      // Navigator.pop(context);
+                      if (_title.text.isEmpty || _description.text.isEmpty) {
+                        _buildAlert(context);
+                      } else {
+                        //print("entro aqui.....");
+                        register = RegisterPromoted(
+                            idFilm: 99999 + 6,
+                            titleFilm: _title.text,
+                            descriptionFilm: _description.text,
+                            idGenre: _selectedgenero.id);
+                        // print("genero"+ idGenre);
+                        registerPromoted(register).then((value) => {
+                              if (value != null)
+                                {
+                                  //print("entro aqui"),
+                                  Navigator.push(
+                                    context,
+                                    new MaterialPageRoute(
+                                      builder: (context) => new SearchPage(),
+                                    ),
+                                  )
+                                }
+                              else
+                                {
+                                  // _buildAlert(context)
+                                }
+                            });
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+            GFAccordion(
+              title: "Realizar Pago",
+              collapsedIcon: Icon(Icons.add),
+              expandedIcon: Icon(Icons.minimize),
+              contentChild: ListView(
+                  shrinkWrap: true,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                  children: <Widget>[
+                    Center(child: Text("Pago")),
+                    Row(
+                      children: [
+                        Expanded(child: Text("Valor a Pagar")),
+                        Expanded(child: _buildValorAPagar())
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Text("Fecha")),
+                        Expanded(child: _buildfecha())
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(child: Text("Tipo de pago")),
+                        Expanded(
+                            child: DropdownButton(
+                          hint: Text(
+                              'Selecionar Metodo'), // Not necessary for Option 1
+                          value: _selectedLocation,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedLocation = newValue;
+                            });
+                          },
+                          items: _locations.map((location) {
+                            return DropdownMenuItem(
+                              child: new Text(location),
+                              value: location,
+                            );
+                          }).toList(),
+                        ))
+                      ],
+                    ),
+                    MaterialButton(
+                        child: Text('Realizar pago'),
+                        color: Colors.blue,
+                        textColor: Colors.white,
+                        //shape: StadiumBorder(),
+                        onPressed: () {
+                          advertisingFinalService().then((value) => {
+                                if (value)
+                                  {
+                                    _buildAlertParameter(context, "Exito",
+                                        "El Pago se realizo correctamente  ")
+                                  }
+                                else
+                                  {
+                                    _buildAlertParameter(context, "Error",
+                                        "El pago no se pudo procesar  ")
+                                  }
+                              });
+                        })
+                  ]),
+            )
+          ],
+        ),
       ),
+    );
+  }
+
+// Metodo que estructura al momento de dar un click con una alerta
+// return un alerta
+//
+  void _buildAlertParameter(BuildContext context, String titulo, String texto) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          title: Text(titulo),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(texto),
+              // FlutterLogo(size: 100.0)
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  //Navigator.pushNamed(context, '/');
+                })
+          ],
+        );
+      },
+    );
+
+    setState(() {});
+  }
+
+  Widget _buildValorAPagar() {
+    return TextField(
+        //autofocus: true,
+        controller: valorApagar,
+        style: TextStyle(
+          color: Colors.black,
+          fontFamily: 'OpenSans',
+        ),
+        decoration: InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        ));
+  }
+
+  Widget _buildfecha() {
+    return TextFormField(
+      controller: dateCtl,
+      decoration: InputDecoration(
+        labelText: "Seleccionar Fecha",
+        hintText: "Ex. Insert your dob",
+      ),
+      onTap: () async {
+        DateTime date = DateTime(1900);
+        FocusScope.of(context).requestFocus(new FocusNode());
+
+        date = await showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1900),
+            lastDate: DateTime(2100));
+
+        dateCtl.text = date.toIso8601String();
+      },
     );
   }
 

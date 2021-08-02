@@ -1,3 +1,4 @@
+import 'package:flutter_demo/src/Model/Publications.dart';
 import 'package:flutter_demo/src/Model/User.dart';
 
 class Comunity {
@@ -5,7 +6,7 @@ class Comunity {
   String name;
   String description;
   String genres;
-  List<dynamic> publications; //lista de publicaciones de la comunidad
+  List<Publications> publications; //lista de publicaciones de la comunidad
   List<User> users; //lista de usuarios que estan en la comunidad
 
   Comunity({
@@ -23,22 +24,22 @@ class Comunity {
         name: json['name'],
         description: json['description'],
         genres: json['genres'],
-        publications: json['publications'],
+        publications: getListPublications(json),
         users: getListUser(json));
   }
 
   static List<User> getListUser(jsonData) {
     List<User> usersList2 = [];
     for (var item in jsonData["users"]) {
-      usersList2.add(User(id: '.', userName: item["userName"]));
+      usersList2.add(User.fromJson(item));
     }
     return usersList2;
   }
 
-  static List<User> getListPublications(jsonData) {
-    List<User> usersList2 = [];
-    for (var item in jsonData["users"]) {
-      usersList2.add(User(id: '.', userName: item["userName"]));
+  static List<Publications> getListPublications(jsonData) {
+    List<Publications> usersList2 = [];
+    for (var item in jsonData["publications"]) {
+      usersList2.add(Publications.fromJson(item));
     }
     return usersList2;
   }

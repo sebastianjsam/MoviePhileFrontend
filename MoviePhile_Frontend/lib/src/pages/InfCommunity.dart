@@ -26,26 +26,22 @@ class _InfCommunityState extends State<InfCommunitys> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       fiml = ModalRoute.of(context).settings.arguments;
-      _InfCommunity = InfComunityService.GetInformationCommunityId(3);
+      _InfCommunity = InfComunityService.GetInformationCommunityId(1);
       setState(() {});
     });
   }
 
   @override
-  void didInitState() {}
-
-  @override
   Widget build(BuildContext context) {
-    String userID = "";
-    final _comentario = TextEditingController(text: "");
     print(ModalRoute.of(context).settings.arguments);
+    String userID = '';
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: Text("MoviePhile")),
         // drawer: MenuLateral(),
         body: Container(
-          color: Colors.grey,
+          color: Colors.white,
           child: SingleChildScrollView(
             child: FutureBuilder<InfComunity>(
                 future: _InfCommunity,
@@ -55,9 +51,32 @@ class _InfCommunityState extends State<InfCommunitys> {
                       children: [
                         _titleFilm(snapshot.data.name),
                         _descriptionFilm(snapshot.data.description),
+                        _buttonJoinCommunity(userID),
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  "Publicaciones",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    color: Colors.black54
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  ... _listPublication(snapshot.data.publications),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                         // _listInfPublication(snapshot.data.users),
-
-                        _dividerLine(),
+                        // _dividerLine(),
                         // _boxComment(userID, _comentario),
                         //  _buttonCommentar(_comentario, userID)
                       ],
@@ -65,11 +84,39 @@ class _InfCommunityState extends State<InfCommunitys> {
                   } else if (snapshot.hasError) {
                     return Text("error en la conexión");
                   }
+                  return CircularProgressIndicator();
                 }),
           ),
         ),
       ),
     );
+  }
+
+  Column _boxComment(userID, _comentario) {
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: Row(
+          children: [
+            Text(
+              "Comenta...",
+              style: TextStyle(),
+            ),
+          ],
+        ),
+      ),
+      Container(
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        child: TextField(
+            controller: _comentario,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              fillColor: Colors.white,
+              focusColor: Colors.white,
+              hoverColor: Colors.white,
+            )),
+      ),
+    ]);
   }
 
   Padding _titleFilm(title) {
@@ -100,22 +147,103 @@ class _InfCommunityState extends State<InfCommunitys> {
 
   List<Widget> _listPublication(List<Publications> data) {
     List<Widget> films = [];
+    String userID = "";
+    final _comentario = TextEditingController(text: "");
+
     for (var publication in data) {
-      films.add(Card(
-          child: Column(
-        children: [
-          Padding(
-              padding: const EdgeInsets.all(1.0),
-              child: Text(
-                publication.title,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
-                    color: Colors.red),
-                textAlign: TextAlign.center,
-              )),
-        ],
-      )));
+      films.add(Container(
+        width: MediaQuery.of(context).size.width * 0.95,
+        child: Card(
+            color: Colors.blueGrey[50],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    publication.title,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.blue),
+                  )
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Text(
+                        publication.content,
+                        textDirection: TextDirection.ltr,
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Comentarios: ", textAlign: TextAlign.left,)
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),    
+                          child: Column(
+                            children: [
+                              for (var c in publication.comments)
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                        0.85,
+                                      child: Card(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Column(
+                                      crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          c.user.email + ': ',
+                                          style: TextStyle(
+                                              color: Colors.blueAccent),
+                                        ),
+                                        Text(
+                                          c.content,
+                                        ),
+                                      ],
+                                    ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    _dividerLine(),
+                                    _boxComment(userID, TextEditingController(text: "")),
+                                    _buttonCommentar(_comentario, userID)
+                                  ],
+                                )
+                            ],
+                          )
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            )),
+      ));
     }
     return films;
   }
@@ -133,6 +261,46 @@ class _InfCommunityState extends State<InfCommunitys> {
     );
   }
 
+  Padding _buttonJoinCommunity(userID) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 12.0, top: 0, bottom: 10.0),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: ElevatedButton(
+          onPressed: () {},
+          child: Text("Unirme"),
+        ),
+      ),
+    );
+  }
+
+  ListView _commentScreen(comments) {
+    return ListView.builder(
+      padding: EdgeInsets.all(10), //espaciado
+      scrollDirection:
+          Axis.vertical, //obligatorio declarar width para evitar error
+      //reverse: true,
+      itemCount: comments?.length ?? 0,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: Card(
+            child: ListTile(
+              subtitle: Text(
+                comments
+                    .cast<dynamic>()[index]['user']['email']
+                    .toString(),
+                textAlign: TextAlign.right,
+              ),
+              title: Text(comments
+                  .cast<dynamic>()[index]['content']
+                  .toString()),
+            ),
+          ),
+        );
+      });
+  }
+
   ListView _listInfPublication(snapshot) {
     return ListView.builder(
         padding: EdgeInsets.all(10), //espaciado
@@ -144,12 +312,10 @@ class _InfCommunityState extends State<InfCommunitys> {
         itemCount: snapshot.data.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            width: MediaQuery.of(context).size.width * 0.5,
             child: Card(
               child: Row(
                 children: [
                   Container(
-                    width: 200,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
