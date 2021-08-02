@@ -9,13 +9,13 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
-      userName: json['user'],
+      userName: json['userName'],
       email: json['email'],
       password: json['password']
     );
   }
 
   Map<String, dynamic> toJson() => {
-    "id": this.id, "name": this.userName, "email": this.email, "password": this.password
+    "id": this.id, "userName": this.userName, "email": this.email, "password": this.password
   };
 }

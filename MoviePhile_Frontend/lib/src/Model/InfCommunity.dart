@@ -20,19 +20,19 @@ class InfComunity {
 
   factory InfComunity.fromJson(Map<String, dynamic> json) {
     return InfComunity(
-        id: json['id'],
-        name: json['name'],
-        description: json['description'],
-        genres: json['genres'],
-        publications: getListPublications(json),
-        users: getListUser(json));
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      genres: json['genres'],
+      publications: getListPublications(json),
+      users: getListUser(json)
+    );
   }
   static List<User> getListUser(jsonData) {
     List<User> usersList2 = [];
     var name;
     for (var item in jsonData["users"]) {
-      usersList2.add(User(userName: item["userName"]));
-      print("Usuarios________");
+      usersList2.add(User.fromJson(item));
     }
     return usersList2;
   }
@@ -40,8 +40,7 @@ class InfComunity {
   static List<Publications> getListPublications(jsonData) {
     List<Publications> publicationList = [];
     for (var item in jsonData["publications"]) {
-      publicationList.add(Publications(
-          id: item["id"], title: item["title"], content: item["content"]));
+      publicationList.add(Publications.fromJson(item));
     }
 
     return publicationList;
