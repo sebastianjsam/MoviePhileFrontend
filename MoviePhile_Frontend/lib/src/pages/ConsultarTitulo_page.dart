@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/Film.dart';
-import 'package:flutter_demo/src/Model/User_Login.dart';
-import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
-import 'package:flutter_demo/src/pages/FilmComment.dart';
-import 'package:flutter_demo/src/pages/Registrar_Comunidad.dart';
-import 'package:flutter_demo/src/pages/UserLogin_page.dart';
+
 import 'package:flutter_demo/src/services/SearchTitle_service.dart';
 
 import 'menulateral.dart';

@@ -27,64 +27,67 @@ class _LoginPageState extends State<AddUsertToComunity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Column(children: [
-          Text("MoviePhile"),
-          GestureDetector(
-            child: Text('Debate, Comparte, conoce y acercate al cine',
-                style: TextStyle(fontFamily: 'MyFont', fontSize: 10)),
-          )
-        ]),
-      ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-        children: <Widget>[
-          Container(
-            child: Column(
-              children: <Widget>[
-                Center(
-                  child: Text(
-                    'Agregar usuario a comunidad',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontFamily: 'OpenSans',
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Column(children: [
+            Text("MoviePhile"),
+            GestureDetector(
+              child: Text('Debate, Comparte, conoce y acercate al cine',
+                  style: TextStyle(fontFamily: 'MyFont', fontSize: 10)),
+            )
+          ]),
+        ),
+        body: ButtonJoinComunity());
+  }
+
+  Widget ButtonJoinComunity() {
+    return ListView(
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+      children: <Widget>[
+        Container(
+          child: Column(
+            children: <Widget>[
+              Center(
+                child: Text(
+                  'Agregar usuario a comunidad',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontFamily: 'OpenSans',
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                )
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 30.0,
+              )
+            ],
           ),
-          Divider(),
-          Container(
-            child: FutureBuilder<bool>(
-                future: _seguirOrNot,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    print("snapshot: " + snapshot.data.toString());
-                    return Column(
-                      children: [
-                        getAddOrRemove(snapshot.data),
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text("error en la conexión");
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 50.0),
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
+        ),
+        Divider(),
+        Container(
+          child: FutureBuilder<bool>(
+              future: _seguirOrNot,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  print("snapshot: " + snapshot.data.toString());
+                  return Column(
+                    children: [
+                      getAddOrRemove(snapshot.data),
+                    ],
                   );
-                }),
-          )
-        ],
-      ),
+                } else if (snapshot.hasError) {
+                  return Text("error en la conexión");
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }),
+        )
+      ],
     );
   }
 
