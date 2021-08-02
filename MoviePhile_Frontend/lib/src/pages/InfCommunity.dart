@@ -42,11 +42,20 @@ class _InfCommunityState extends State<InfCommunitys> {
   Widget build(BuildContext context) {
     print(ModalRoute.of(context).settings.arguments);
     String userID = '';
-
+    debugShowCheckedModeBanner:
+    false;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text("MoviePhile")),
-        // drawer: MenuLateral(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Column(children: [
+            Text("MoviePhile"),
+            GestureDetector(
+              child: Text('Debate, Comparte, conoce y acercate al cine',
+                  style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
+            )
+          ]),
+        ),
         body: Container(
           color: Colors.white,
           child: SingleChildScrollView(
@@ -61,18 +70,22 @@ class _InfCommunityState extends State<InfCommunitys> {
 
                         containerDatos(),
                         _buttonCrearPublicacion(comunidadId),
+                        Divider(),
+                        Divider(),
                         Container(
                           alignment: Alignment.topLeft,
                           child: Column(
                             children: [
                               Container(
-                                alignment: Alignment.centerLeft,
+                                alignment: Alignment.center,
                                 child: Text(
                                   "Publicaciones",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0,
-                                      color: Colors.black54),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    color: Colors.black,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                               Column(
@@ -277,7 +290,7 @@ class _InfCommunityState extends State<InfCommunitys> {
     return Padding(
       padding: const EdgeInsets.only(left: 12.0, top: 0, bottom: 10.0),
       child: Align(
-        alignment: Alignment.topLeft,
+        alignment: Alignment.topCenter,
         child: ElevatedButton(
           onPressed: () {},
           child: Text("Unirme"),
@@ -290,7 +303,7 @@ class _InfCommunityState extends State<InfCommunitys> {
     return Padding(
       padding: const EdgeInsets.only(left: 12.0, top: 0, bottom: 10.0),
       child: Align(
-        alignment: Alignment.topLeft,
+        alignment: Alignment.topCenter,
         child: ElevatedButton(
           onPressed: () {
             Navigator.push(
@@ -301,7 +314,10 @@ class _InfCommunityState extends State<InfCommunitys> {
                             arguments: 1);
 */
           },
-          child: Text("Crear Publicación"),
+          child: Text(
+            "Crear Publicación",
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );

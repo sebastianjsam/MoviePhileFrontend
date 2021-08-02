@@ -25,7 +25,7 @@ class _LoginPageState extends State<UserLogin_page> {
           Text("MoviePhile"),
           GestureDetector(
             child: Text('Debate, Comparte, conoce y acercate al cine',
-                style: TextStyle(fontFamily: 'MyFont', fontSize: 10)),
+                style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
           )
         ]),
       ),
@@ -55,7 +55,7 @@ class _LoginPageState extends State<UserLogin_page> {
           _buildPassword(),
           Divider(),
           _buildBtnLogin(),
-          Divider(),
+          //  Divider(),
           _buildSignupBtn()
         ],
       ),

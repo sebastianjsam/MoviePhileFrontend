@@ -41,8 +41,16 @@ class _CommentFilmState extends State<CommentFilm> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text("MoviePhile")),
-        // drawer: MenuLateral(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Column(children: [
+            Text("MoviePhile"),
+            GestureDetector(
+              child: Text('Debate, Comparte, conoce y acercate al cine',
+                  style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
+            )
+          ]),
+        ),
         body: Container(
           color: Colors.grey,
           child: SingleChildScrollView(

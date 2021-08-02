@@ -24,6 +24,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'MaterialApp',
       home: Scaffold(
           appBar: AppBar(

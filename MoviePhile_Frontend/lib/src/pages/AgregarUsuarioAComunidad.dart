@@ -26,6 +26,8 @@ class _LoginPageState extends State<AddUsertToComunity> {
 
   @override
   Widget build(BuildContext context) {
+    debugShowCheckedModeBanner:
+    false;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -33,7 +35,7 @@ class _LoginPageState extends State<AddUsertToComunity> {
           Text("MoviePhile"),
           GestureDetector(
             child: Text('Debate, Comparte, conoce y acercate al cine',
-                style: TextStyle(fontFamily: 'MyFont', fontSize: 10)),
+                style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
           )
         ]),
       ),

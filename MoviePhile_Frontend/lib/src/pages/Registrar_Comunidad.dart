@@ -18,10 +18,26 @@ class _Registrar_Comunidad extends State<Registrar_Comunidad> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Registrar comunidad")),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Column(children: [
+          Text("MoviePhile"),
+          GestureDetector(
+            child: Text('Debate, Comparte, conoce y acercate al cine',
+                style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
+          )
+        ]),
+      ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
         children: <Widget>[
+          Text(
+            'Registrar Comunidad',
+            style: TextStyle(fontFamily: 'MyFont', fontSize: 25),
+            textAlign: TextAlign.center,
+          ),
+          Divider(),
+          Divider(),
           _setName(),
           Divider(),
           _setDescription(),
