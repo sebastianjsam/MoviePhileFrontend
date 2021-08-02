@@ -4,6 +4,7 @@ import 'package:flutter_demo/src/Model/User_Login.dart';
 import 'package:flutter_demo/src/pages/ConsultCommunity.dart';
 import 'package:flutter_demo/src/pages/FilmComment.dart';
 import 'package:flutter_demo/src/pages/PostInCommunity.dart';
+import 'package:flutter_demo/src/pages/Register_Promoted.dart';
 import 'package:flutter_demo/src/pages/Registrar_Comunidad.dart';
 import 'package:flutter_demo/src/pages/UserLogin_page.dart';
 import 'package:flutter_demo/src/services/SearchTitle_service.dart';
@@ -65,6 +66,17 @@ class MenuLateral extends StatelessWidget {
                 context,
                 new MaterialPageRoute(
                   builder: (context) => new PostInCommunity(),
+                ),
+              );
+            },
+          ),
+          new ListTile(
+            title: Text("Titulo Promocionado"),
+            onTap: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (context) => new PromotedPage(),
                 ),
               );
             },
