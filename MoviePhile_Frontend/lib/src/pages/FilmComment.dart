@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/FilmS.dart';
 import 'package:flutter_demo/src/services/FilmCommentService.dart';
+import 'package:flutter_demo/src/services/RecordfilmratingService.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 import 'menulateral.dart';
@@ -50,8 +52,17 @@ class _CommentFilmState extends State<CommentFilm> {
                   if (snapshot.hasData) {
                     return Column(
                       children: [
-                        _titleFilm(snapshot.data.title),
-                        _imgFilm(snapshot),
+                        _titleFilmDecorado(snapshot.data.title),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            _imgFilm(snapshot),
+                            _calificacion(snapshot)
+                          ],
+                        ),
+                        _dividerLine(),
+                        _rating(fiml),
+                        _dividerLine(),
                         _descriptionFilm(snapshot.data.overView.toString()),
                         Container(
                           height: snapshot.data.comments.length == 0 ? 0 : 200,
@@ -74,6 +85,70 @@ class _CommentFilmState extends State<CommentFilm> {
                 }),
           ),
         ),
+      ),
+    );
+  }
+
+  Text _calificacion(snapshot) {
+    return Text(snapshot.data.score.toStringAsFixed(1),
+        style: TextStyle(color: Colors.black, fontSize: 50));
+  }
+
+  Row _rating(int filmId) {
+    return Row(
+      children: [
+        Text(
+          "Calificar: ",
+          style: TextStyle(
+              color: Colors.amber, fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        Expanded(
+            child: RatingBar.builder(
+          itemCount: 5,
+          initialRating: 3.4,
+          itemBuilder: (context, int index) {
+            return Icon(Icons.star, color: Colors.amber);
+          },
+          onRatingUpdate: (double value) {
+            print("valor de estrellas: " + value.toString());
+            //llamamos al servicio
+            RecordfilmratingService.Recordfilmrating2(value.toInt(), filmId);
+
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              fiml = ModalRoute.of(context).settings.arguments;
+              _filcomentList = FilmcommentService.allCommentGetFilm(fiml);
+              setState(() {});
+            });
+          },
+        )),
+      ],
+    );
+  }
+
+  Container _titleFilmDecorado(title) {
+    return Container(
+      child: Stack(
+        children: <Widget>[
+          // Stroked text as border.
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 40,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 6
+                ..color = Colors.blue[700],
+            ),
+          ),
+          // Solid text as fill.
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.grey[300],
+            ),
+          ),
+        ],
       ),
     );
   }
