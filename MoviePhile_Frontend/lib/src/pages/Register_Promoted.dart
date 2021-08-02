@@ -96,7 +96,7 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
               } else {
                 //print("entro aqui.....");
                 register = RegisterPromoted(
-                    idFilm: 99999 + 6,
+                    idFilm: 99999 + 10,
                     titleFilm: _title.text,
                     descriptionFilm: _description.text,
                     idGenre: _selectedgenero.id);
