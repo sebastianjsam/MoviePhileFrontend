@@ -11,10 +11,11 @@ class InfComunityService {
     url += '/api/Community/InformationCommunity' +
         "?Idcommunity=" +
         idComunity.toString();
+    var token = await getStoredToken();
     //HttpOverrides.global = new MyHttpOverrides();
     final response = await http.get(Uri.parse(url), headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer ' + TextApp.TOKEN_TEMPORAL
+      'Authorization': 'Bearer ' + token
     });
     print("entro  response" + response.body);
 
