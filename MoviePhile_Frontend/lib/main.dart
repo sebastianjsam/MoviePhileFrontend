@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         title: 'Material App',
         debugShowCheckedModeBanner: false,
         // home: HomePage()
-        initialRoute: '/',
+        initialRoute: 'welcome',
         routes: getRoutes(),
         onGenerateRoute: (RouteSettings settings) {
           return MaterialPageRoute(
