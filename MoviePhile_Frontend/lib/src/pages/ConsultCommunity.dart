@@ -25,6 +25,7 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'MaterialApp',
       home: Scaffold(
           appBar: AppBar(
@@ -162,6 +163,9 @@ class _ConsultComunityPageState extends State<ConsultComunityPage> {
                             context,
                             new MaterialPageRoute(
                                 builder: (context) => new InfCommunitys()));
+                        /* Navigator.pushNamed(context, "InfCommunity",
+                            arguments: 1);
+*/
                       },
                     ),
                   )

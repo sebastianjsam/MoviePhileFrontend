@@ -71,11 +71,19 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Titulo Promocionado'),
+        title: Column(children: [
+          Text("MoviePhile"),
+          GestureDetector(
+            child: Text('Debate, Comparte, conoce y acercate al cine',
+                style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
+          )
+        ]),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Divider(),
+            Divider(),
             GFAccordion(
               title: "Registrar titulo",
               collapsedIcon: Icon(Icons.add),
@@ -85,7 +93,7 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                 children: <Widget>[
                   Text(
-                    "Pelicula promocionada",
+                    "Titulo Promocionado",
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
@@ -143,6 +151,8 @@ class _RegisterPromotedPageState extends State<PromotedPage> {
                 ],
               ),
             ),
+            Divider(),
+            Divider(),
             GFAccordion(
               title: "Realizar Pago",
               collapsedIcon: Icon(Icons.add),

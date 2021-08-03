@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/FilmS.dart';
 import 'package:flutter_demo/src/Model/InfCommunity.dart';
 import 'package:flutter_demo/src/Model/Publications.dart';
+import 'package:flutter_demo/src/pages/PostInCommunity.dart';
 import 'package:flutter_demo/src/services/FilmCommentService.dart';
 import 'package:flutter_demo/src/services/InfCommunity.dart';
 import 'package:flutter_demo/src/services/addUserToCommunityService.dart';
 import 'package:flutter_demo/src/utils/TextApp.dart';
 import 'package:overlay_support/overlay_support.dart';
-
+import 'package:flutter_demo/src/services/addUserToCommunityService.dart';
 import 'menulateral.dart';
 
 class InfCommunitys extends StatefulWidget {
@@ -22,11 +23,15 @@ Future<bool> _seguirOrNot;
 
 class _InfCommunityState extends State<InfCommunitys> {
   Future<InfComunity> _InfCommunity;
-
+  Future<bool> _seguirOrNot;
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      //fiml = ModalRoute.of(context).settings.arguments;
 
+      setState(() {});
+    });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       fiml = ModalRoute.of(context).settings.arguments;
       comunidadId = ModalRoute.of(context).settings.arguments;
@@ -40,11 +45,20 @@ class _InfCommunityState extends State<InfCommunitys> {
   Widget build(BuildContext context) {
     print(ModalRoute.of(context).settings.arguments);
     String userID = '';
-
+    debugShowCheckedModeBanner:
+    false;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text("MoviePhile")),
-        // drawer: MenuLateral(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Column(children: [
+            Text("MoviePhile"),
+            GestureDetector(
+              child: Text('Debate, Comparte, conoce y acercate al cine',
+                  style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
+            )
+          ]),
+        ),
         body: Container(
           color: Colors.white,
           child: SingleChildScrollView(
@@ -56,13 +70,17 @@ class _InfCommunityState extends State<InfCommunitys> {
                       children: [
                         _titleFilm(snapshot.data.name),
                         _descriptionFilm(snapshot.data.description),
-                        _buttonJoinCommunity(userID),
+
+                        containerDatos(),
+                        _buttonCrearPublicacion(comunidadId),
+                        Divider(),
+                        Divider(),
                         Container(
                           alignment: Alignment.topLeft,
                           child: Column(
                             children: [
                               Container(
-                                alignment: Alignment.centerLeft,
+                                alignment: Alignment.center,
                                 child: Text(
                                   "Publicaciones",
                                   style: TextStyle(
@@ -273,6 +291,30 @@ class _InfCommunityState extends State<InfCommunitys> {
     return Container(); //ButtonJoinComunity();
   }
 
+  Padding _buttonCrearPublicacion(ComunityID) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 12.0, top: 0, bottom: 10.0),
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) => new PostInCommunity()));
+            /* Navigator.pushNamed(context, "InfCommunity",
+                            arguments: 1);
+*/
+          },
+          child: Text(
+            "Crear Publicación",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+
   ListView _commentScreen(comments) {
     return ListView.builder(
         padding: EdgeInsets.all(10), //espaciado
@@ -349,6 +391,124 @@ class _InfCommunityState extends State<InfCommunitys> {
         });
   }
 
-  //----Si se logra cambiar mejor
+  Widget containerDatos() {
+    return Container(
+      child: FutureBuilder<bool>(
+          future: _seguirOrNot,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              print("snapshot: " + snapshot.data.toString());
+              return Column(
+                children: [
+                  getAddOrRemove(snapshot.data),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Text("error en la conexión");
+            }
+            return Padding(
+              padding: const EdgeInsets.only(top: 50.0),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }),
+    );
+  }
 
+  Widget getAddOrRemove(bool selector) {
+    if (!selector) {
+      return _buildBtnAddUser();
+    } else {
+      return _buildBtnRemoveUser();
+    }
+  }
+
+// Metodo que estructura al momento de dar un click con una alerta
+// return un alerta
+//
+  void _buildAlert(BuildContext context, String titulo, String texto) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          title: Text(titulo),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text(texto),
+              // FlutterLogo(size: 100.0)
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  //Navigator.pushNamed(context, '/');
+                })
+          ],
+        );
+      },
+    );
+    _seguirOrNot = serviceStatusUserCommunity(1);
+    setState(() {});
+  }
+
+  Widget _buildBtnAddUser() {
+    return MaterialButton(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      // width: double.minPositive,
+      onPressed: () {},
+      // ignore: deprecated_member_use
+      child: RaisedButton(
+        child: Text('Unirme'),
+        color: Colors.lightBlue,
+        textColor: Colors.white,
+        shape: StadiumBorder(),
+        onPressed: () {
+          serviceAddUserCommunity(comunidadId).then((value) => {
+                if (value)
+                  {_buildAlert(context, "Exito", "El usuario fue agregado  ")}
+                else
+                  {
+                    _buildAlert(
+                        context, "Error", "El usuario no fue agregado  ")
+                  }
+              });
+        },
+        padding: EdgeInsets.all(15.0),
+      ),
+    );
+  }
+
+  Widget _buildBtnRemoveUser() {
+    return MaterialButton(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      // width: double.minPositive,
+      onPressed: () {},
+      // ignore: deprecated_member_use
+      child: RaisedButton(
+        child: Text('Desunirme'),
+        color: Colors.grey.shade300,
+        textColor: Colors.black,
+        shape: StadiumBorder(),
+        onPressed: () {
+          serviceRemoveUserCommunity(comunidadId).then((value) => {
+                if (value)
+                  {_buildAlert(context, "Exito", "El usuario fue Eliminado  ")}
+                else
+                  {
+                    _buildAlert(
+                        context, "Error", "El usuario no fue eliminado.. ")
+                  }
+              });
+        },
+        padding: EdgeInsets.all(15.0),
+      ),
+    );
+  }
 }

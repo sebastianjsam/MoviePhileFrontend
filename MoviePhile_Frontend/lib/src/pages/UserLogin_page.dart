@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/src/Model/User_Login.dart';
+import 'package:flutter_demo/src/pages/Registro_page.dart';
 
 import 'package:flutter_demo/src/services/user_service.dart';
+import 'mySignUpLabelButton.dart';
 
 class UserLogin_page extends StatefulWidget {
   @override
@@ -25,7 +27,7 @@ class _LoginPageState extends State<UserLogin_page> {
           Text("MoviePhile"),
           GestureDetector(
             child: Text('Debate, Comparte, conoce y acercate al cine',
-                style: TextStyle(fontFamily: 'MyFont', fontSize: 10)),
+                style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
           )
         ]),
       ),
@@ -55,8 +57,41 @@ class _LoginPageState extends State<UserLogin_page> {
           _buildPassword(),
           Divider(),
           _buildBtnLogin(),
-          Divider(),
-          _buildSignupBtn()
+          // Divider(),
+          //_buildSignupBtn()
+          _divider2(),
+          MySgnUpLabelButton(
+            firstText: "¿You do not have an account?",
+            secondText: "Register ",
+            secondTextColor: Theme.of(context).primaryColorDark,
+            widgetToNavigate: RegistroPage(),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _divider2() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+              child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Divider(
+              thickness: 1,
+            ),
+          )),
+          Text("O"),
+          //lo que hace es añadirlo en el centro
+          Expanded(
+              child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Divider(
+              thickness: 1,
+            ),
+          ))
         ],
       ),
     );

@@ -28,7 +28,16 @@ class _RecordFilmRatingState extends State<RecordFilmRating> {
 
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(title: Text("MoviePhile")),
+          appBar: AppBar(
+            centerTitle: true,
+            title: Column(children: [
+              Text("MoviePhile"),
+              GestureDetector(
+                child: Text('Debate, Comparte, conoce y acercate al cine',
+                    style: TextStyle(fontFamily: 'MyFont', fontSize: 15)),
+              )
+            ]),
+          ),
           drawer: MenuLateral(),
           body: _Rating(
             508943,

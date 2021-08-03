@@ -61,7 +61,7 @@ class MenuLateral extends StatelessWidget {
               );
             },
           ),
-          new ListTile(
+          /* new ListTile(
             title: Text("Crear una Publicacion en Comunidad"),
             onTap: () {
               Navigator.push(
@@ -71,8 +71,8 @@ class MenuLateral extends StatelessWidget {
                 ),
               );
             },
-          ),
-          new ListTile(
+          ),*/
+          /* new ListTile(
             title: Text("Agregar usuario a comunidad"),
             onTap: () {
               Navigator.push(
@@ -82,8 +82,8 @@ class MenuLateral extends StatelessWidget {
                 ),
               );
             },
-          ),
-          new ListTile(
+          ),*/
+          /* new ListTile(
             title: Text("Calificar Film"),
             onTap: () {
               Navigator.push(
@@ -93,7 +93,7 @@ class MenuLateral extends StatelessWidget {
                 ),
               );
             },
-          ),
+          ),*/
           new ListTile(
             title: Text("Titulo Promocionado"),
             onTap: () {

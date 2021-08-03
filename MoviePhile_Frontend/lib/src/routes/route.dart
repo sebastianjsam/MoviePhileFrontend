@@ -11,6 +11,7 @@ import 'package:flutter_demo/src/pages/Principal.dart';
 import 'package:flutter_demo/src/pages/Registro_page.dart';
 import 'package:flutter_demo/src/pages/ConsultarTitulo_page.dart';
 import 'package:flutter_demo/src/pages/Registrar_Comunidad.dart';
+import 'package:flutter_demo/src/pages/welcomeScreen.dart';
 
 Map<String, WidgetBuilder> getRoutes() {
   return <String, WidgetBuilder>{
@@ -30,11 +31,12 @@ Map<String, WidgetBuilder> getRoutes() {
 
     'PostInCommunity': (BuildContext context) => PostInCommunity(),
 
-    'InfCommunity': (BuildContext context) => InfCommunitys(),
     'Promoted': (BuildContext context) => PromotedPage(),
 
     'addUserToCommunity': (BuildContext context) => AddUsertToComunity(),
 
     'RecordFilmRating': (BuildContext context) => RecordFilmRating(),
+    'InfCommunity': (BuildContext context) => InfCommunitys(),
+    'welcome': (BuildContext context) => WelcomeScreen(),
   };
 }

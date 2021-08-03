@@ -26,6 +26,8 @@ class _LoginPageState extends State<AddUsertToComunity> {
 
   @override
   Widget build(BuildContext context) {
+    debugShowCheckedModeBanner:
+    false;
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -88,6 +90,31 @@ class _LoginPageState extends State<AddUsertToComunity> {
               }),
         )
       ],
+    );
+  }
+
+  Widget containerDatos() {
+    return Container(
+      child: FutureBuilder<bool>(
+          future: _seguirOrNot,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              print("snapshot: " + snapshot.data.toString());
+              return Column(
+                children: [
+                  getAddOrRemove(snapshot.data),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Text("error en la conexión");
+            }
+            return Padding(
+              padding: const EdgeInsets.only(top: 50.0),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }),
     );
   }
 
